@@ -3,29 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GlowSkin - Pilih Perawatanmu</title>
+    <title>GlowSkin - Diskusi Produk</title>
     
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
         :root {
             --primary-bg: #fdfbf7;
             --text-dark: #333333;
             --text-light: #666666;
             --accent-toner: #9e8fb2;
             --accent-toner-dark: #7a6b8e;
-            --accent-toner-light: #f4f0f9;
             --accent-serum: #e6a4a4;
             --accent-serum-dark: #cf7878;
-            --accent-serum-light: #fdf2f2;
-            --accent-me: #4caf50; /* Warna Hijau untuk komentar sendiri */
+            --accent-me: #4caf50; /* Warna untuk komentar user aktif */
             --white: #ffffff;
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
             --transition: all 0.3s ease;
@@ -34,85 +28,40 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--primary-bg); color: var(--text-dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
 
         .hidden { display: none !important; }
         .fade-in { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HEADER --- */
-        header {
-            background-color: var(--white);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            cursor: pointer;
-        }
-
+        header { background-color: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 10px; cursor: pointer; }
         nav { display: flex; gap: 1.2rem; }
-
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-light);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.9rem;
-            position: relative;
-        }
+        .nav-link { text-decoration: none; color: var(--text-light); font-weight: 600; cursor: pointer; transition: var(--transition); font-size: 0.9rem; }
         .nav-link:hover { color: var(--text-dark); }
         .nav-link.toner-link:hover { color: var(--accent-toner); }
         .nav-link.serum-link:hover { color: var(--accent-serum); }
 
-        /* --- HERO & CARDS --- */
+        /* --- USER SWITCHER (SIMULASI LOGIN) --- */
+        .user-switcher-container {
+            background: #fff; padding: 10px 20px; border-radius: 50px; display: flex;
+            align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin: 0 auto 2rem; width: fit-content; border: 1px solid #eee;
+        }
+        .user-switcher-container label { font-size: 0.9rem; font-weight: 600; color: var(--text-light); }
+        .user-switcher-container select {
+            padding: 8px 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins';
+            background-color: #fafafa; cursor: pointer;
+        }
+
+        /* --- CARDS & SELECTION --- */
         .hero { text-align: center; padding: 3rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
         .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
         .hero p { color: var(--text-light); }
 
-        .selection-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto 4rem;
-            flex-grow: 1;
-        }
-
-        .card {
-            background: var(--white);
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
+        .selection-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem 5%; max-width: 1200px; margin: 0 auto 4rem; flex-grow: 1; }
+        .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; border: 1px solid transparent; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
         .toner-card:hover { border-color: var(--accent-toner); }
         .serum-card:hover { border-color: var(--accent-serum); }
@@ -120,20 +69,15 @@
         .card-image { height: 250px; overflow: hidden; position: relative; }
         .card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .card:hover .card-image img { transform: scale(1.05); }
-        
         .card-content { padding: 2rem; text-align: center; }
         .card-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
         .toner-card .card-icon { color: var(--accent-toner); }
         .serum-card .card-icon { color: var(--accent-serum); }
-
-        .btn-card {
-            display: inline-block; margin-top: 1rem; padding: 10px 25px; border-radius: 50px;
-            color: white; font-weight: 600; text-decoration: none; transition: var(--transition);
-        }
+        .btn-card { display: inline-block; margin-top: 1rem; padding: 10px 25px; border-radius: 50px; color: white; font-weight: 600; text-decoration: none; transition: var(--transition); }
         .toner-card .btn-card { background-color: var(--accent-toner); }
         .serum-card .btn-card { background-color: var(--accent-serum); }
 
-        /* --- PRODUCT PAGE --- */
+        /* --- PRODUCT & FORUM --- */
         .product-page { padding: 2rem 5%; max-width: 1200px; margin: 0 auto 4rem; flex-grow: 1; }
         .detail-container { display: flex; flex-wrap: wrap; background: var(--white); border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); }
         .detail-image { flex: 1 1 400px; height: 500px; position: relative; }
@@ -149,114 +93,54 @@
         
         .feature-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2.5rem; }
         .feature-item { display: flex; align-items: center; gap: 10px; font-weight: 500; }
-        
         #page-toner .detail-price { color: var(--accent-toner); }
-        #page-toner .feature-item i { color: var(--accent-toner); }
         #page-toner .action-btn { background-color: var(--accent-toner); }
-        
         #page-serum .detail-price { color: var(--accent-serum); }
-        #page-serum .feature-item i { color: var(--accent-serum); }
         #page-serum .action-btn { background-color: var(--accent-serum); }
 
-        .action-btn {
-            width: 100%; padding: 15px; border: none; border-radius: 50px; color: rgb(0, 0, 0);
-            font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); text-align: center; display: block;
-        }
+        .action-btn { width: 100%; padding: 15px; border: none; border-radius: 50px; color: rgb(0, 0, 0); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); text-align: center; display: block; }
         .action-btn:hover { opacity: 0.9; transform: scale(1.02); }
 
-        /* --- FORUM STYLES --- */
-        
-        /* User Switcher Bar */
-        .user-switcher {
-            background: #fff;
-            padding: 10px 20px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            margin-bottom: 1.5rem;
-            align-self: flex-start;
-        }
-        .user-switcher label { font-size: 0.9rem; font-weight: 600; color: var(--text-light); }
-        .user-switcher select {
-            padding: 5px 10px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins';
-        }
-
+        /* FORUM UI */
+        .qa-feed-header { margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #eee; }
         .forum-wrapper { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: start; }
-
-        .form-card {
-            background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow);
-            position: sticky; top: 100px;
-        }
-
+        .form-card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); position: sticky; top: 100px; }
+        
         .form-group { margin-bottom: 1.2rem; }
         .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark); }
-        
-        .form-input, .form-textarea, .form-select {
-            width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px;
-            font-family: 'Poppins', sans-serif; font-size: 0.95rem; transition: var(--transition);
-        }
-        .form-input:focus, .form-textarea:focus {
-            outline: none; border-color: #FF6B6B; box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-        }
+        .form-input, .form-textarea, .form-select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; transition: var(--transition); }
+        .form-input:focus, .form-textarea:focus { outline: none; border-color: #FF6B6B; box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1); }
         .form-select:disabled { background-color: #f9f9f9; color: #888; cursor: not-allowed; }
 
-        .submit-btn {
-            width: 100%; padding: 15px; background: var(--bright-gradient); color: white; border: none;
-            border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer;
-            transition: var(--transition); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
-        }
+        .submit-btn { width: 100%; padding: 15px; background: var(--bright-gradient); color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); }
         .submit-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6); }
 
-        .qa-feed-header { margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid #eee; }
-
-        .qa-card {
-            background: var(--white); border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: var(--transition); position: relative;
-        }
+        /* COMMENTS CARDS */
+        .qa-card { background: var(--white); border-radius: 15px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: var(--transition); position: relative; border: 1px solid transparent; }
         .qa-card:hover { box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
-        .delete-btn {
-            position: absolute; top: 15px; right: 15px; background: none; border: none; color: #ccc;
-            cursor: pointer; font-size: 1rem; transition: var(--transition); padding: 5px;
-        }
+        /* Highlight jika komen milik user yang sedang login */
+        .qa-card.my-question { border: 2px solid var(--accent-me); background-color: #f9fff9; }
+
+        .delete-btn { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #ccc; cursor: pointer; font-size: 1rem; transition: var(--transition); padding: 5px; }
         .delete-btn:hover { color: #ff4d4d; transform: scale(1.1); }
 
         .qa-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 0.9rem; color: var(--text-light); }
         .qa-avatar { width: 35px; height: 35px; background: #eee; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-light); }
         .qa-name { font-weight: 700; color: var(--text-dark); }
-        .qa-question { font-weight: 500; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 1rem; padding-left: 45px; }
+        .qa-question { font-weight: 500; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 1rem; }
 
-        /* Style Komentar / Jawaban */
-        .qa-answer {
-            background-color: var(--primary-bg); border-left: 4px solid var(--accent-toner); padding: 1rem;
-            border-radius: 0 10px 10px 0; margin-top: 1rem; margin-left: 45px; position: relative;
-        }
-
-        /* Highlight jika komentar milik user yang sedang login */
-        .qa-answer.my-reply {
-            border-left-color: var(--accent-me);
-            background-color: #f0fff4;
-        }
+        .qa-answer { background-color: var(--primary-bg); border-left: 4px solid var(--accent-toner); padding: 1rem; border-radius: 0 10px 10px 0; margin-top: 1rem; position: relative; }
+        
+        .qa-answer.my-reply { border-left-color: var(--accent-me); background-color: #f0fff4; }
         .qa-answer.my-reply .qa-answer-header { color: var(--accent-me); }
-        .qa-answer.my-reply::after {
-            content: 'Anda'; position: absolute; top: 0; right: 10px; font-size: 0.7rem;
-            color: var(--accent-me); font-weight: bold; opacity: 0.7;
-        }
+        .qa-answer.my-reply::after { content: 'Anda'; position: absolute; top: 0; right: 10px; font-size: 0.7rem; color: var(--accent-me); font-weight: bold; opacity: 0.7; }
 
-        .qa-answer-header {
-            font-size: 0.85rem; color: var(--accent-toner-dark); font-weight: 700; margin-bottom: 5px;
-            display: flex; align-items: center; gap: 5px;
-        }
+        .qa-answer-header { font-size: 0.85rem; color: var(--accent-toner-dark); font-weight: 700; margin-bottom: 5px; display: flex; align-items: center; gap: 5px; }
 
-        .btn-reply {
-            background: none; border: 1px solid #ddd; padding: 5px 15px; border-radius: 20px;
-            cursor: pointer; font-size: 0.85rem; margin-left: 45px; transition: var(--transition);
-        }
+        .btn-reply { background: none; border: 1px solid #ddd; padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; transition: var(--transition); }
         .btn-reply:hover { background: #eee; color: var(--text-dark); }
-
-        .reply-form { margin-top: 1rem; margin-left: 45px; display: none; }
+        .reply-form { margin-top: 1rem; display: none; }
         .reply-form.active { display: block; animation: fadeIn 0.3s; }
 
         footer { background-color: var(--white); padding: 2rem; text-align: center; border-top: 1px solid #eee; margin-top: auto; }
@@ -305,7 +189,7 @@
         </div>
     </main>
 
-    <!-- VIEW 2: HALAMAN TONER -->
+    <!-- VIEW 2: TONER DETAIL -->
     <section id="view-toner" class="product-page hidden fade-in">
         <div class="detail-container">
             <div class="detail-image"><img src="https://picsum.photos/seed/watertoner/800/800" alt="Detail Toner"></div>
@@ -313,7 +197,7 @@
                 <div class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Kembali ke Menu</div>
                 <h2>BAWI TONER</h2>
                 <span class="detail-price">Rp 40.000</span>
-                <p class="detail-desc">Inspired by the natural 'Bawi Kuwu' treatments, this toner blends Taya stem, Dayak onion, Bajakah water, and Pandan leaves. Natural solution for acne-prone skin.</p>
+                <p class="detail-desc">Inspired by natural 'Bawi Kuwu' treatments, this toner blends Taya stem, Dayak onion, Bajakah water, and Pandan leaves. Natural solution for acne-prone skin.</p>
                 <div class="feature-grid">
                     <div class="feature-item"><i class="fas fa-check-circle"></i> Acne Prone Skin</div>
                     <div class="feature-item"><i class="fas fa-check-circle"></i> Sensitive Skin</div>
@@ -325,7 +209,7 @@
         </div>
     </section>
 
-    <!-- VIEW 3: HALAMAN SERUM -->
+    <!-- VIEW 3: SERUM DETAIL -->
     <section id="view-serum" class="product-page hidden fade-in">
         <div class="detail-container">
             <div class="detail-image"><img src="https://picsum.photos/seed/goldserum/800/800" alt="Detail Serum"></div>
@@ -350,8 +234,8 @@
         <div style="padding-bottom: 2rem;">
             <div class="back-btn" onclick="navigateTo('toner')"><i class="fas fa-arrow-left"></i> Kembali ke Produk Toner</div>
             
-            <!-- FITUR: USER SWITCHER -->
-            <div class="user-switcher">
+            <!-- SIMULASI LOGIN USER -->
+            <div class="user-switcher-container">
                 <label><i class="fas fa-user-circle"></i> Login sebagai:</label>
                 <select id="user-select" onchange="changeUser(this.value)">
                     <option value="Saya">Saya (Guest)</option>
@@ -396,8 +280,8 @@
         <div style="padding-bottom: 2rem;">
             <div class="back-btn" onclick="navigateTo('serum')"><i class="fas fa-arrow-left"></i> Kembali ke Produk Serum</div>
             
-            <!-- FITUR: USER SWITCHER -->
-            <div class="user-switcher">
+            <!-- SIMULASI LOGIN USER -->
+            <div class="user-switcher-container">
                 <label><i class="fas fa-user-circle"></i> Login sebagai:</label>
                 <select id="user-select" onchange="changeUser(this.value)">
                     <option value="Saya">Saya (Guest)</option>
@@ -440,49 +324,68 @@
     <footer><p>&copy; Sejak 2025 GlowSkin Indonesia</p></footer>
 
     <script>
-        // --- 1. DATA & LOCAL STORAGE ---
+        // ==========================================
+        // 1. DATA DEFAULT
+        // ==========================================
         const defaultQuestions = [
-            {
-                id: 1,
-                name: "Siti Aminah",
-                product: "Bawi Toner",
-                question: "Apakah toner ini beneran aman buat kulit yang sedang breakout parah? Saya takut perih.",
-                answer: "Halo Kak Siti, sangat aman karena mengandung bahan alami seperti Bajakah yang bersifat anti-inflamasi.",
-                answeredBy: "Admin GlowSkin", // Siapa yang menjawab
-                date: "2 jam yang lalu"
-            },
-            {
-                id: 2,
-                name: "Rudi Hartono",
-                product: "Tabela Serum",
-                question: "Kalau dipakai siang hari butuh sunscreen gak ya?",
-                answer: "Tentu butuh Kak! Mengandung Vitamin C yang membuat kulit lebih sensitif terhadap sinar matahari.",
-                answeredBy: "Dokter Kulit",
-                date: "5 jam yang lalu"
-            }
+            { id: 1, name: "Siti Aminah", product: "Bawi Toner", question: "Apakah toner ini aman buat breakout parah?", answer: "Sangat aman, mengandung Bajakah anti-inflamasi.", answeredBy: "Admin GlowSkin", date: "2 jam yang lalu" },
+            { id: 2, name: "Rudi Hartono", product: "Tabela Serum", question: "Butuh sunscreen gak siang hari?", answer: "Wajib Kak! Vitamin C bikin kulit sensitif.", answeredBy: "Dokter Kulit", date: "5 jam yang lalu" }
         ];
 
-        let questions = JSON.parse(localStorage.getItem('glowSkinQuestions')) || defaultQuestions;
-        let currentUser = "Saya"; // User Default
+        // ==========================================
+        // 2. KONFIGURASI PENYIMPANAN (LOCAL vs CLOUD)
+        // ==========================================
+        // Jika ingin Online, ubah USE_CLOUD = true dan isi API_KEY dari service (misal: Firebase/JSONBin)
+        const USE_CLOUD = false; 
+        const API_KEY = ""; // Masukkan API Key Database Anda di sini jika USE_CLOUD = true
+        const DB_URL = "https://api.database-anda.com/endpoint"; // URL Endpoint API Anda
 
-        function saveQuestions() { localStorage.setItem('glowSkinQuestions', JSON.stringify(questions)); }
+        let questions = [];
+        let currentUser = "Saya";
 
-        // --- 2. FITUR GANTI USER (SIMULASI) ---
+        // Load Data (Cek LocalStorage dulu, jika kosong pakai Default)
+        function loadData() {
+            const stored = localStorage.getItem('glowSkinQuestions');
+            if (stored) {
+                questions = JSON.parse(stored);
+            } else {
+                questions = defaultQuestions;
+                saveData();
+            }
+        }
+
+        // Save Data (Simpan ke LocalStorage atau Kirim ke Cloud)
+        function saveData() {
+            localStorage.setItem('glowSkinQuestions', JSON.stringify(questions));
+            
+            // LOGIKA PENGIRIMAN KE CLOUD (Untuk User Lain Lihat)
+            if (USE_CLOUD) {
+                // Di sini kode fetch API Anda akan berjalan
+                // fetch(DB_URL, { method: 'POST', body: JSON.stringify(questions) ... })
+                console.log("Mengirim data ke Cloud Server..."); 
+            }
+        }
+
+        // ==========================================
+        // 3. USER SWITCHER (SIMULASI)
+        // ==========================================
         function changeUser(newUser) {
             currentUser = newUser;
-            // Update semua input nama di form yang sedang terlihat
+            // Update form input name
             const tonerInput = document.getElementById('askerName-toner');
             const serumInput = document.getElementById('askerName-serum');
             if(tonerInput && !tonerInput.value) tonerInput.value = newUser;
             if(serumInput && !serumInput.value) serumInput.value = newUser;
 
-            // Re-render untuk melihat highlight komentar milik user baru ini
+            // Re-render untuk melihat highlight user baru ini
             const activeView = document.querySelector('section:not(.hidden)').id;
             if (activeView === 'view-toner-forum') renderFeed('Bawi Toner');
             if (activeView === 'view-serum-forum') renderFeed('Tabela Serum');
         }
 
-        // --- 3. NAVIGASI ---
+        // ==========================================
+        // 4. NAVIGASI
+        // ==========================================
         function navigateTo(viewName) {
             const views = ['view-home', 'view-toner', 'view-serum', 'view-toner-forum', 'view-serum-forum'];
             views.forEach(id => document.getElementById(id).classList.add('hidden'));
@@ -501,7 +404,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- 4. RENDER FORUM ---
+        // ==========================================
+        // 5. RENDER FORUM
+        // ==========================================
         function renderFeed(productFilter) {
             let containerId = productFilter === 'Bawi Toner' ? 'qaFeed-toner' : 'qaFeed-serum';
             const feedContainer = document.getElementById(containerId);
@@ -510,7 +415,7 @@
             const filteredQuestions = questions.filter(q => q.product === productFilter);
 
             if(filteredQuestions.length === 0) {
-                feedContainer.innerHTML = '<p style="text-align:center; color:#999; padding:2rem;">Belum ada diskusi untuk produk ini. Jadilah yang pertama bertanya!</p>';
+                feedContainer.innerHTML = '<p style="text-align:center; color:#999; padding:2rem;">Belum ada diskusi untuk produk ini.</p>';
                 return;
             }
 
@@ -518,13 +423,20 @@
                 const originalIndex = questions.findIndex(item => item.id === q.id);
                 const hasAnswer = q.answer !== null;
                 
-                // Cek apakah jawaban ini dari user yang sedang login
+                // Cek apakah Komentar/Pertanyaan ini milik user yang sedang login
+                const isMyQuestion = (q.name === currentUser);
                 const isMyReply = (hasAnswer && q.answeredBy === currentUser);
+                
+                // CSS Class untuk Highlight
+                const questionClass = isMyQuestion ? 'qa-card my-question' : 'qa-card';
                 const replyClass = isMyReply ? 'qa-answer my-reply' : 'qa-answer';
 
                 const html = `
-                    <div class="qa-card">
+                    <div class="${questionClass}">
+                        ${isMyQuestion ? '<div style="position:absolute; top:-10px; left:20px; background:var(--accent-me); color:white; padding:2px 10px; font-size:0.7rem; border-radius:10px;">Anda bertanya</div>' : ''}
+                        
                         <button class="delete-btn" onclick="deleteQuestion(${originalIndex})"><i class="fas fa-trash-alt"></i></button>
+
                         <div class="qa-meta">
                             <div class="qa-avatar"><i class="fas fa-user"></i></div>
                             <div>
@@ -532,7 +444,7 @@
                                 <div style="font-size: 0.75rem; background: ${getProductColor(q.product)}; color: white; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-left: 5px;">${q.product}</div>
                             </div>
                         </div>
-                        <div class="qa-question">${q.question}</div>
+                        <div class="qa-question" style="${isMyQuestion ? 'color:var(--accent-me);' : ''}">${q.question}</div>
 
                         ${hasAnswer ? `
                             <div class="${replyClass}">
@@ -558,7 +470,9 @@
             return '#999';
         }
 
-        // --- 5. POSTING PERTANYAAN ---
+        // ==========================================
+        // 6. AKSI TANYA & JAWAB
+        // ==========================================
         function postQuestion(e, productName) {
             e.preventDefault();
             const nameId = productName === 'Bawi Toner' ? 'askerName-toner' : 'askerName-serum';
@@ -577,8 +491,8 @@
                 date: "Baru saja"
             };
 
-            questions.unshift(newQuestion);
-            saveQuestions();
+            questions.unshift(newQuestion); // Tambah ke paling atas
+            saveData(); // Simpan ke LocalStorage / Kirim ke Cloud
             
             document.getElementById(nameId).value = '';
             document.getElementById(contentId).value = '';
@@ -587,27 +501,14 @@
             alert("Pertanyaan berhasil dikirim!");
         }
 
-        // --- 6. JAWAB & HAPUS ---
-        function toggleReply(index) {
-            const form = document.getElementById(`replyForm-${index}`);
-            if (form.style.display === 'block') {
-                form.style.display = 'none';
-                form.classList.remove('active');
-            } else {
-                form.style.display = 'block';
-                form.classList.add('active');
-            }
-        }
-
         function submitReply(index) {
             const input = document.getElementById(`replyText-${index}`);
             const replyText = input.value;
 
             if (replyText.trim() !== "") {
-                // Simpan siapa yang menjawab
                 questions[index].answer = replyText;
-                questions[index].answeredBy = currentUser; // SIMPAN NAMA USER AKTIF
-                saveQuestions();
+                questions[index].answeredBy = currentUser; // SIMPAN SIAPA YANG MENJAWAB
+                saveData();
                 
                 const product = questions[index].product;
                 renderFeed(product);
@@ -620,10 +521,25 @@
             if (confirm("Hapus pertanyaan ini?")) {
                 const product = questions[index].product;
                 questions.splice(index, 1);
-                saveQuestions();
+                saveData();
                 renderFeed(product);
             }
         }
+
+        function toggleReply(index) {
+            const form = document.getElementById(`replyForm-${index}`);
+            if (form.style.display === 'block') {
+                form.style.display = 'none';
+                form.classList.remove('active');
+            } else {
+                form.style.display = 'block';
+                form.classList.add('active');
+            }
+        }
+
+        // Init
+        loadData();
+
     </script>
 </body>
 </html>
