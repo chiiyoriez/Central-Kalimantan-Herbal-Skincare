@@ -10,6 +10,10 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Firebase SDK (Compat Version untuk HTML Sederhana) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+
     <style>
         :root {
             --primary-bg: #fdfbf7;
@@ -19,7 +23,7 @@
             --accent-toner-dark: #7a6b8e;
             --accent-serum: #e6a4a4;
             --accent-serum-dark: #cf7878;
-            --accent-me: #4caf50; /* Warna untuk komentar user aktif */
+            --accent-me: #4caf50; /* Warna Hijau untuk komentar sendiri */
             --white: #ffffff;
             --shadow: 0 10px 30px rgba(0,0,0,0.08);
             --transition: all 0.3s ease;
@@ -43,17 +47,10 @@
         .nav-link.toner-link:hover { color: var(--accent-toner); }
         .nav-link.serum-link:hover { color: var(--accent-serum); }
 
-        /* --- USER SWITCHER (SIMULASI LOGIN) --- */
-        .user-switcher-container {
-            background: #fff; padding: 10px 20px; border-radius: 50px; display: flex;
-            align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            margin: 0 auto 2rem; width: fit-content; border: 1px solid #eee;
-        }
+        /* --- USER SWITCHER --- */
+        .user-switcher-container { background: #fff; padding: 10px 20px; border-radius: 50px; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); margin: 0 auto 2rem; width: fit-content; border: 1px solid #eee; }
         .user-switcher-container label { font-size: 0.9rem; font-weight: 600; color: var(--text-light); }
-        .user-switcher-container select {
-            padding: 8px 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins';
-            background-color: #fafafa; cursor: pointer;
-        }
+        .user-switcher-container select { padding: 8px 15px; border-radius: 10px; border: 1px solid #ddd; font-family: 'Poppins'; background-color: #fafafa; cursor: pointer; }
 
         /* --- CARDS & SELECTION --- */
         .hero { text-align: center; padding: 3rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
@@ -84,7 +81,7 @@
         .detail-image img { width: 100%; height: 100%; object-fit: cover; }
         .detail-content { flex: 1 1 400px; padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
         
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; color: var(--text-light); text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; margin-bottom:1.5rem; color: var(--text-light); text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
         .back-btn:hover { color: var(--text-dark); transform: translateX(-5px); }
 
         .detail-content h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
@@ -234,7 +231,6 @@
         <div style="padding-bottom: 2rem;">
             <div class="back-btn" onclick="navigateTo('toner')"><i class="fas fa-arrow-left"></i> Kembali ke Produk Toner</div>
             
-            <!-- SIMULASI LOGIN USER -->
             <div class="user-switcher-container">
                 <label><i class="fas fa-user-circle"></i> Login sebagai:</label>
                 <select id="user-select" onchange="changeUser(this.value)">
@@ -280,7 +276,6 @@
         <div style="padding-bottom: 2rem;">
             <div class="back-btn" onclick="navigateTo('serum')"><i class="fas fa-arrow-left"></i> Kembali ke Produk Serum</div>
             
-            <!-- SIMULASI LOGIN USER -->
             <div class="user-switcher-container">
                 <label><i class="fas fa-user-circle"></i> Login sebagai:</label>
                 <select id="user-select" onchange="changeUser(this.value)">
@@ -325,66 +320,80 @@
 
     <script>
         // ==========================================
-        // 1. DATA DEFAULT
+        // 1. KONFIGURASI FIREBASE (DATA DARI ANDA)
         // ==========================================
-        const defaultQuestions = [
-            { id: 1, name: "Siti Aminah", product: "Bawi Toner", question: "Apakah toner ini aman buat breakout parah?", answer: "Sangat aman, mengandung Bajakah anti-inflamasi.", answeredBy: "Admin GlowSkin", date: "2 jam yang lalu" },
-            { id: 2, name: "Rudi Hartono", product: "Tabela Serum", question: "Butuh sunscreen gak siang hari?", answer: "Wajib Kak! Vitamin C bikin kulit sensitif.", answeredBy: "Dokter Kulit", date: "5 jam yang lalu" }
-        ];
+        const firebaseConfig = {
+            apiKey: "AIzaSyChfGHmmnynHcIrspY17--RVKMyj609HUg",
+            authDomain: "web-kir.firebaseapp.com",
+            databaseURL: "https://web-kir-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "web-kir",
+            storageBucket: "web-kir.firebasestorage.app",
+            messagingSenderId: "924508236082",
+            appId: "1:924508236082:web:73ea433f8e0c6204934f2b",
+            measurementId: "G-Y5RVQQ2FQ9"
+        };
 
-        // ==========================================
-        // 2. KONFIGURASI PENYIMPANAN (LOCAL vs CLOUD)
-        // ==========================================
-        // Jika ingin Online, ubah USE_CLOUD = true dan isi API_KEY dari service (misal: Firebase/JSONBin)
-        const USE_CLOUD = false; 
-        const API_KEY = ""; // Masukkan API Key Database Anda di sini jika USE_CLOUD = true
-        const DB_URL = "https://api.database-anda.com/endpoint"; // URL Endpoint API Anda
+        // Inisialisasi Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
 
         let questions = [];
         let currentUser = "Saya";
 
-        // Load Data (Cek LocalStorage dulu, jika kosong pakai Default)
-        function loadData() {
-            const stored = localStorage.getItem('glowSkinQuestions');
-            if (stored) {
-                questions = JSON.parse(stored);
-            } else {
-                questions = defaultQuestions;
-                saveData();
-            }
-        }
-
-        // Save Data (Simpan ke LocalStorage atau Kirim ke Cloud)
-        function saveData() {
-            localStorage.setItem('glowSkinQuestions', JSON.stringify(questions));
+        // ==========================================
+        // 2. LISTEN KE DATABASE (REAL-TIME)
+        // ==========================================
+        function listenToDatabase() {
+            const questionsRef = database.ref('questions');
             
-            // LOGIKA PENGIRIMAN KE CLOUD (Untuk User Lain Lihat)
-            if (USE_CLOUD) {
-                // Di sini kode fetch API Anda akan berjalan
-                // fetch(DB_URL, { method: 'POST', body: JSON.stringify(questions) ... })
-                console.log("Mengirim data ke Cloud Server..."); 
-            }
+            questionsRef.on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    questions = Object.keys(data).map(key => data[key]);
+                    questions.sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    const activeView = document.querySelector('section:not(.hidden)').id;
+                    if (activeView === 'view-toner-forum') renderFeed('Bawi Toner');
+                    if (activeView === 'view-serum-forum') renderFeed('Tabela Serum');
+                } else {
+                    questions = [];
+                }
+            });
         }
 
         // ==========================================
-        // 3. USER SWITCHER (SIMULASI)
+        // 3. WRITE KE DATABASE
+        // ==========================================
+        function writeToDatabase(data) {
+            database.ref('questions').push(data);
+        }
+
+        function deleteFromDatabase(id) {
+            const questionsRef = database.ref('questions');
+            questionsRef.orderByChild('id').equalTo(id).once('value', snapshot => {
+                snapshot.forEach(child => {
+                    child.ref.remove();
+                });
+            });
+        }
+
+        // ==========================================
+        // 4. USER SWITCHER
         // ==========================================
         function changeUser(newUser) {
             currentUser = newUser;
-            // Update form input name
             const tonerInput = document.getElementById('askerName-toner');
             const serumInput = document.getElementById('askerName-serum');
             if(tonerInput && !tonerInput.value) tonerInput.value = newUser;
             if(serumInput && !serumInput.value) serumInput.value = newUser;
 
-            // Re-render untuk melihat highlight user baru ini
             const activeView = document.querySelector('section:not(.hidden)').id;
             if (activeView === 'view-toner-forum') renderFeed('Bawi Toner');
             if (activeView === 'view-serum-forum') renderFeed('Tabela Serum');
         }
 
         // ==========================================
-        // 4. NAVIGASI
+        // 5. NAVIGASI
         // ==========================================
         function navigateTo(viewName) {
             const views = ['view-home', 'view-toner', 'view-serum', 'view-toner-forum', 'view-serum-forum'];
@@ -405,7 +414,7 @@
         }
 
         // ==========================================
-        // 5. RENDER FORUM
+        // 6. RENDER FORUM
         // ==========================================
         function renderFeed(productFilter) {
             let containerId = productFilter === 'Bawi Toner' ? 'qaFeed-toner' : 'qaFeed-serum';
@@ -415,19 +424,15 @@
             const filteredQuestions = questions.filter(q => q.product === productFilter);
 
             if(filteredQuestions.length === 0) {
-                feedContainer.innerHTML = '<p style="text-align:center; color:#999; padding:2rem;">Belum ada diskusi untuk produk ini.</p>';
+                feedContainer.innerHTML = '<p style="text-align:center; color:#999; padding:2rem;">Belum ada diskusi untuk produk ini. Jadilah yang pertama bertanya!</p>';
                 return;
             }
 
-            filteredQuestions.forEach((q, index) => {
-                const originalIndex = questions.findIndex(item => item.id === q.id);
+            filteredQuestions.forEach((q) => {
                 const hasAnswer = q.answer !== null;
-                
-                // Cek apakah Komentar/Pertanyaan ini milik user yang sedang login
                 const isMyQuestion = (q.name === currentUser);
                 const isMyReply = (hasAnswer && q.answeredBy === currentUser);
                 
-                // CSS Class untuk Highlight
                 const questionClass = isMyQuestion ? 'qa-card my-question' : 'qa-card';
                 const replyClass = isMyReply ? 'qa-answer my-reply' : 'qa-answer';
 
@@ -435,7 +440,7 @@
                     <div class="${questionClass}">
                         ${isMyQuestion ? '<div style="position:absolute; top:-10px; left:20px; background:var(--accent-me); color:white; padding:2px 10px; font-size:0.7rem; border-radius:10px;">Anda bertanya</div>' : ''}
                         
-                        <button class="delete-btn" onclick="deleteQuestion(${originalIndex})"><i class="fas fa-trash-alt"></i></button>
+                        <button class="delete-btn" onclick="deleteQuestion(${q.id})"><i class="fas fa-trash-alt"></i></button>
 
                         <div class="qa-meta">
                             <div class="qa-avatar"><i class="fas fa-user"></i></div>
@@ -452,11 +457,11 @@
                                 ${q.answer}
                             </div>
                         ` : `
-                            <div class="reply-form" id="replyForm-${originalIndex}">
-                                <input type="text" id="replyText-${originalIndex}" class="form-input" placeholder="Tulis jawabanmu..." style="margin-bottom: 5px;">
-                                <button onclick="submitReply(${originalIndex})" class="btn-card" style="font-size: 0.8rem; padding: 5px 15px; background-color: var(--accent-toner);">Kirim Jawaban</button>
+                            <div class="reply-form" id="replyForm-${q.id}">
+                                <input type="text" id="replyText-${q.id}" class="form-input" placeholder="Tulis jawabanmu..." style="margin-bottom: 5px;">
+                                <button onclick="submitReply(${q.id})" class="btn-card" style="font-size: 0.8rem; padding: 5px 15px; background-color: var(--accent-toner);">Kirim Jawaban</button>
                             </div>
-                            <button onclick="toggleReply(${originalIndex})" class="btn-reply"><i class="fas fa-reply"></i> Jawab</button>
+                            <button onclick="toggleReply(${q.id})" class="btn-reply"><i class="fas fa-reply"></i> Jawab</button>
                         `}
                     </div>
                 `;
@@ -471,7 +476,7 @@
         }
 
         // ==========================================
-        // 6. AKSI TANYA & JAWAB
+        // 7. AKSI TANYA & JAWAB
         // ==========================================
         function postQuestion(e, productName) {
             e.preventDefault();
@@ -483,6 +488,7 @@
 
             const newQuestion = {
                 id: Date.now(),
+                timestamp: Date.now(),
                 name: name,
                 product: productName,
                 question: content,
@@ -491,43 +497,46 @@
                 date: "Baru saja"
             };
 
-            questions.unshift(newQuestion); // Tambah ke paling atas
-            saveData(); // Simpan ke LocalStorage / Kirim ke Cloud
+            writeToDatabase(newQuestion);
             
             document.getElementById(nameId).value = '';
             document.getElementById(contentId).value = '';
             
-            renderFeed(productName);
-            alert("Pertanyaan berhasil dikirim!");
+            alert("Pertanyaan berhasil dikirim ke Server!");
         }
 
-        function submitReply(index) {
-            const input = document.getElementById(`replyText-${index}`);
+        function submitReply(qId) {
+            const input = document.getElementById(`replyText-${qId}`);
             const replyText = input.value;
 
             if (replyText.trim() !== "") {
-                questions[index].answer = replyText;
-                questions[index].answeredBy = currentUser; // SIMPAN SIAPA YANG MENJAWAB
-                saveData();
-                
-                const product = questions[index].product;
-                renderFeed(product);
+                const qIndex = questions.findIndex(q => q.id === qId);
+                if(qIndex > -1) {
+                    questions[qIndex].answer = replyText;
+                    questions[qIndex].answeredBy = currentUser;
+                    
+                    database.ref('questions').orderByChild('id').equalTo(qId).once('value', snapshot => {
+                        snapshot.forEach(child => {
+                            child.ref.update({
+                                answer: replyText,
+                                answeredBy: currentUser
+                            });
+                        });
+                    });
+                }
             } else {
                 alert("Mohon isi jawaban terlebih dahulu.");
             }
         }
 
-        function deleteQuestion(index) {
+        function deleteQuestion(qId) {
             if (confirm("Hapus pertanyaan ini?")) {
-                const product = questions[index].product;
-                questions.splice(index, 1);
-                saveData();
-                renderFeed(product);
+                deleteFromDatabase(qId);
             }
         }
 
-        function toggleReply(index) {
-            const form = document.getElementById(`replyForm-${index}`);
+        function toggleReply(qId) {
+            const form = document.getElementById(`replyForm-${qId}`);
             if (form.style.display === 'block') {
                 form.style.display = 'none';
                 form.classList.remove('active');
@@ -537,8 +546,8 @@
             }
         }
 
-        // Init
-        loadData();
+        // Mulai mendengarkan database saat load
+        listenToDatabase();
 
     </script>
 </body>
