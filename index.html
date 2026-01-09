@@ -60,7 +60,7 @@
         /* Desktop Nav */
         nav.desktop-nav { display: flex; gap:1.2rem; align-items: center; }
 
-        /* Tombol Menu HP (Harus Z-Index Tertinggi biar bisa dipencet) */
+        /* Tombol Menu HP */
         .mobile-menu-btn { 
             display: none; 
             font-size: 1.5rem; 
@@ -89,20 +89,17 @@
         .logout-btn:hover { text-decoration: underline; }
 
         /* --- SIDE DRAWER MENU --- */
-        /* Latar Belakang Gelap */
         .backdrop {
             position: fixed; inset: 0; background: rgba(0,0,0,0.5); 
-            z-index: 1001; /* Di atas Header, di bawah Drawer */
-            display: none; opacity: 0; transition: opacity 0.3s;
+            z-index: 1001; display: none; opacity: 0; transition: opacity 0.3s;
         }
         .backdrop.active { display: block; opacity: 1; }
 
-        /* Menu Samping */
         .side-drawer {
-            position: fixed; top: 0; right: -300px; /* Sembunyi di kanan */
+            position: fixed; top: 0; right: -300px;
             width: 280px; height: 100vh;
             background: var(--white);
-            z-index: 1002; /* Di atas Backdrop */
+            z-index: 1002;
             padding-top: 80px; 
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: -5px 0 15px rgba(0,0,0,0.1);
@@ -115,7 +112,6 @@
             font-size: 1.5rem; color: var(--text-dark); cursor: pointer;
         }
 
-        /* Item Menu Berurutan */
         .drawer-menu-list { list-style: none; padding: 0; margin: 0; }
         .drawer-item {
             display: block;
@@ -125,12 +121,26 @@
         .drawer-item:hover { background: #f9f9f9; color: var(--accent-toner); padding-left: 30px; }
         .drawer-item i { margin-right: 12px; width: 20px; text-align: center; }
 
-        /* --- CARDS & SELECTION --- */
-        .hero { text-align: center; padding: 3rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { color: var(--text-light); }
+        /* --- HOME PAGE SECTIONS --- */
+        
+        /* 1. Intro Section */
+        .hero-intro {
+            background: linear-gradient(135deg, #fdfbf7 0%, #e6e6fa 100%);
+            padding: 5rem 1rem 3rem;
+            text-align: center;
+        }
+        .hero-intro h1 { font-size: 3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; }
+        .hero-intro h1 span { color: var(--accent-toner); }
+        .hero-intro p { font-size: 1.2rem; color: var(--text-light); max-width: 700px; margin: 0 auto 2rem; }
+        .btn-scroll {
+            padding: 12px 30px; background: var(--text-dark); color: white; border: none; border-radius: 50px;
+            font-size: 1rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+        }
+        .btn-scroll:hover { background: var(--accent-toner); transform: scale(1.05); }
 
-        .selection-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 2rem 5%; max-width: 1200px; margin: 0 auto 4rem; flex-grow: 1; }
+        /* 2. Selection Section */
+        .section-title { text-align: center; font-size: 2rem; margin: 3rem 0 2rem; color: var(--text-dark); }
+        .selection-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 5%; max-width: 1200px; margin: 0 auto 4rem; }
         .card { background: var(--white); border-radius: 20px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); cursor: pointer; border: 1px solid transparent; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.12); }
 
@@ -140,6 +150,23 @@
         .card-content { padding: 2rem; text-align: center; }
         .card-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
         .btn-card { display: inline-block; margin-top: 1rem; padding: 10px 25px; border-radius: 50px; color: white; font-weight: 600; text-decoration: none; transition: var(--transition); }
+        
+        /* 3. Lab Section */
+        .lab-section { padding: 4rem 5%; background: var(--white); margin-bottom: 4rem; }
+        .lab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 2rem auto 0; }
+        .lab-item { text-align: center; padding: 2rem; border: 1px solid #eee; border-radius: 15px; transition: var(--transition); }
+        .lab-item:hover { background: #fdfbf7; border-color: var(--accent-toner); }
+        .lab-icon { font-size: 2.5rem; color: var(--accent-toner); margin-bottom: 1rem; }
+        .lab-item h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
+        .lab-item p { font-size: 0.9rem; color: var(--text-light); }
+
+        /* 4. Testimonial Section */
+        .testi-section { padding: 4rem 5%; max-width: 1200px; margin: 0 auto; }
+        .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .testi-card { background: var(--white); padding: 2rem; border-radius: 15px; box-shadow: var(--shadow); text-align: center; }
+        .testi-avatar { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin-bottom: 1rem; border: 3px solid var(--accent-serum); }
+        .testi-text { font-style: italic; color: #555; margin-bottom: 1rem; }
+        .testi-name { font-weight: 700; color: var(--text-dark); }
         
         /* --- AUTH FORMS --- */
         .auth-container {
@@ -178,6 +205,7 @@
         .forum-wrapper { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: start; }
         .form-card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); position: sticky; top: 100px; }
         .form-group { margin-bottom: 1.2rem; }
+        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark); }
         .form-input, .form-textarea, .form-select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; transition: var(--transition); }
         .form-input:focus, .form-textarea:focus { outline: none; border-color: #FF6B6B; box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1); }
         .submit-btn { width: 100%; padding: 15px; background: var(--bright-gradient); color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); }
@@ -209,24 +237,37 @@
             padding: 2px 6px; border-radius: 4px; margin-left: 5px; vertical-align: middle;
         }
 
-        footer { background-color: var(--white); padding: 2rem; text-align: center; border-top: 1px solid #eee; margin-top: auto; }
+        /* FOOTER UPDATED */
+        footer { 
+            background-color: var(--white); 
+            padding: 3rem 2rem; 
+            text-align: center; 
+            border-top: 1px solid #eee; 
+            margin-top: auto; 
+        }
+        .footer-content {
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 1rem;
+        }
+        .social-links { display: flex; gap: 1.5rem; }
+        .social-links a {
+            color: var(--text-light); font-size: 1.5rem; transition: var(--transition);
+        }
+        .social-links a:hover { color: var(--accent-toner); transform: scale(1.2); }
 
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 900px) { .forum-wrapper { grid-template-columns: 1fr; } .form-card { position: static; } }
         
         @media (max-width: 768px) { 
             .selection-container { grid-template-columns: 1fr; } 
+            .hero-intro h1 { font-size: 2rem; } 
             .detail-image { height: 300px; } 
             .detail-content { padding: 2rem; } 
-            .hero h1 { font-size: 2rem; } 
             
-            /* Hide Desktop Nav */
             nav.desktop-nav { display: none; } 
-            
-            /* Show Mobile Menu Button */
             .mobile-menu-btn { display: block; }
-            
-            /* Show Auth Section on Mobile */
             #auth-section { display: flex; align-items: center; }
         }
     </style>
@@ -258,17 +299,17 @@
                 </div>
             </div>
 
-            <!-- Mobile Menu Button (Hanya 1, di sini) -->
+            <!-- Mobile Menu Button -->
             <button class="mobile-menu-btn" onclick="toggleMenu()">
                 <i class="fas fa-bars" id="menu-icon"></i>
             </button>
         </div>
     </header>
 
-    <!-- Overlay Latar Belakang (Backdrop) -->
+    <!-- Overlay Latar Belakang -->
     <div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
 
-    <!-- Side Drawer Menu (Menu Samping) -->
+    <!-- Side Drawer Menu -->
     <div class="side-drawer" id="sideDrawer">
         <div class="drawer-close-btn" onclick="toggleMenu()">
             <i class="fas fa-times"></i>
@@ -276,7 +317,6 @@
         
         <!-- Daftar Menu Berurutan -->
         <div style="padding: 20px;">
-            <!-- Kategori: Navigasi -->
             <p style="color:#888; font-size:0.75rem; text-transform:uppercase; font-weight:700; margin-bottom:10px;">Navigasi</p>
             <ul class="drawer-menu-list">
                 <li><a href="#" class="drawer-item" onclick="navigateTo('home'); toggleMenu()"><i class="fas fa-home"></i> Home</a></li>
@@ -284,7 +324,6 @@
                 <li><a href="#" class="drawer-item" onclick="navigateTo('serum'); toggleMenu()"><i class="fas fa-flask"></i> Serum</a></li>
             </ul>
 
-            <!-- Kategori: Diskusi -->
             <p style="color:#888; font-size:0.75rem; text-transform:uppercase; font-weight:700; margin:20px 0 10px;">Diskusi</p>
             <ul class="drawer-menu-list">
                 <li><a href="#" class="drawer-item" onclick="navigateTo('toner-forum'); toggleMenu()">Diskusi Toner</a></li>
@@ -293,30 +332,82 @@
         </div>
     </div>
 
-    <!-- VIEW1: HOME -->
+    <!-- VIEW 1: HOME (DIUBAH MENJADI SCROLL) -->
     <main id="view-home" class="fade-in">
-        <section class="hero">
-            <h1>Pilih Jenis Perawatan</h1>
-            <p>Apakah kulit Anda membutuhkan hidrasi ringan atau nutrisi intensif?</p>
+        
+        <!-- 1. INTRO SECTION (Paling Atas) -->
+        <section class="hero-intro">
+            <h1>GlowSkin <span>Indonesia</span></h1>
+            <p>Solusi skincare alami dan terpercaya untuk merawat kecantikan sejati Anda. Dapatkan kulit sehat, bercahaya, dan penuh percaya diri.</p>
+            <button class="btn-scroll" onclick="scrollToProducts()">Pilih Perawatan <i class="fas fa-chevron-down"></i></button>
         </section>
-        <div class="selection-container">
-            <article class="card toner-card" onclick="navigateTo('toner')">
-                <div class="card-image"><img src="https://picsum.photos/seed/watertoner/600/400" alt="Toner"></div>
-                <div class="card-content">
-                    <i class="fas fa-spray-can card-icon"></i><h2>BAWI Toner</h2>
-                    <p>Penyegar kulit untuk mengembalikan pH balance.</p>
-                    <span class="btn-card">Lihat Detail</span>
+
+        <!-- 2. SELECTION SECTION (Tengah) -->
+        <section id="products-section">
+            <h2 class="section-title">Pilih Jenis Perawatan</h2>
+            <div class="selection-container">
+                <article class="card toner-card" onclick="navigateTo('toner')">
+                    <div class="card-image"><img src="https://picsum.photos/seed/watertoner/600/400" alt="Toner"></div>
+                    <div class="card-content">
+                        <i class="fas fa-spray-can card-icon"></i><h2>BAWI Toner</h2>
+                        <p>Penyegar kulit untuk mengembalikan pH balance.</p>
+                        <span class="btn-card">Lihat Detail</span>
+                    </div>
+                </article>
+                <article class="card serum-card" onclick="navigateTo('serum')">
+                    <div class="card-image"><img src="https://picsum.photos/seed/goldserum/600/400" alt="Serum"></div>
+                    <div class="card-content">
+                        <i class="fas fa-flask card-icon"></i><h2>TABELA Serum</h2>
+                        <p>Konsentrat nutrisi tinggi untuk kulit sehat bercahaya.</p>
+                        <span class="btn-card">Lihat Detail</span>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- 3. LAB RESULTS SECTION (Bawah Tengah) -->
+        <section class="lab-section">
+            <h2 class="section-title">Teruji Klinis & Aman</h2>
+            <div class="lab-grid">
+                <div class="lab-item">
+                    <i class="fas fa-microscope lab-icon"></i>
+                    <h3>Lulus Uji Lab</h3>
+                    <p>Telah melewati serangkaian tes keamanan dermatologi.</p>
                 </div>
-            </article>
-            <article class="card serum-card" onclick="navigateTo('serum')">
-                <div class="card-image"><img src="https://picsum.photos/seed/goldserum/600/400" alt="Serum"></div>
-                <div class="card-content">
-                    <i class="fas fa-flask card-icon"></i><h2>TABELA Serum</h2>
-                    <p>Konsentrat nutrisi tinggi untuk kulit sehat bercahaya.</p>
-                    <span class="btn-card">Lihat Detail</span>
+                <div class="lab-item">
+                    <i class="fas fa-leaf lab-icon"></i>
+                    <h3>100% Alami</h3>
+                    <p>Terbuat dari ekstrak tanaman pilihan tanpa bahan kimia berbahaya.</p>
                 </div>
-            </article>
-        </div>
+                <div class="lab-item">
+                    <i class="fas fa-shield-alt lab-icon"></i>
+                    <h3>BPOM Halal</h3>
+                    <p>Terdaftar dan diakui aman untuk pemakaian jangka panjang.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. TESTIMONI SECTION (Paling Bawah) -->
+        <section class="testi-section">
+            <h2 class="section-title">Kata Mereka</h2>
+            <div class="testi-grid">
+                <div class="testi-card">
+                    <img src="https://picsum.photos/seed/user1/200/200" alt="User" class="testi-avatar">
+                    <p class="testi-text">"Suka banget sama Bawi Toner! Jerawatku berkurang drastis dalam seminggu. Bakal langganan terus."</p>
+                    <div class="testi-name">Siti Aminah</div>
+                </div>
+                <div class="testi-card">
+                    <img src="https://picsum.photos/seed/user2/200/200" alt="User" class="testi-avatar">
+                    <p class="testi-text">"Serum Tabela itu the best banget. Kulitku jadi cerah dan glowing kayak habis facial."</p>
+                    <div class="testi-name">Rina Mariani</div>
+                </div>
+                <div class="testi-card">
+                    <img src="https://picsum.photos/seed/user3/200/200" alt="User" class="testi-avatar">
+                    <p class="testi-text">"Pelayanan memuaskan dan produknya cepat bereaksi. GlowSkin emang juara!"</p>
+                    <div class="testi-name">Dinda Kirana</div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- VIEW 2: TONER DETAIL -->
@@ -478,7 +569,17 @@
         </div>
     </section>
 
-    <footer><p>&copy; Sejak 2025 GlowSkin Indonesia</p></footer>
+    <!-- FOOTER (DIUPDATE) -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; Sejak 2025 GlowSkin Indonesia</p>
+            <!-- Social Links -->
+            <div class="social-links">
+                <a href="mailto:contact@glowskin.com" title="Gmail"><i class="fas fa-envelope"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
 
     <script>
         // ==========================================
@@ -552,6 +653,11 @@
             }
         }
 
+        // Scroll ke Produk
+        function scrollToProducts() {
+            document.getElementById('products-section').scrollIntoView({ behavior: 'smooth' });
+        }
+
         // Toggle Side Drawer Menu
         function toggleMenu() {
             const drawer = document.getElementById('sideDrawer');
@@ -561,7 +667,7 @@
             drawer.classList.toggle('active');
             backdrop.classList.toggle('active');
 
-            // Ubah icon Strip 3 jadi Silang (X)
+            // Ubah icon
             if (drawer.classList.contains('active')) {
                 icon.classList.remove('fa-bars');
                 icon.classList.add('fa-times');
