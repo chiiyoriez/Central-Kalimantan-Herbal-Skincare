@@ -41,7 +41,18 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- HEADER --- */
-        header { background-color: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        header { 
+            background-color: var(--white); 
+            padding: 1rem 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000; /* Dasar layer */
+        }
+
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 10px; cursor: pointer; }
         
         .header-right { display: flex; align-items: center; gap: 1.2rem; }
@@ -49,9 +60,16 @@
         /* Desktop Nav */
         nav.desktop-nav { display: flex; gap:1.2rem; align-items: center; }
 
-        /* Mobile Menu Button (Strip 3) */
+        /* Tombol Menu HP (Harus Z-Index Tertinggi biar bisa dipencet) */
         .mobile-menu-btn { 
-            display: none; font-size: 1.5rem; color: var(--text-dark); cursor: pointer; background: none; border: none; z-index: 1002;
+            display: none; 
+            font-size: 1.5rem; 
+            color: var(--text-dark); 
+            cursor: pointer; 
+            background: none; 
+            border: none; 
+            z-index: 1003; /* Lebih tinggi dari backdrop */
+            position: relative;
         }
 
         /* Link Styles */
@@ -70,36 +88,42 @@
         .logout-btn { color: #ff4d4d; cursor: pointer; border: none; background: none; font-size: 0.9rem; }
         .logout-btn:hover { text-decoration: underline; }
 
-        /* --- SIDE DRAWER MENU (POP UP DARI SAMPING) --- */
+        /* --- SIDE DRAWER MENU --- */
+        /* Latar Belakang Gelap */
         .backdrop {
             position: fixed; inset: 0; background: rgba(0,0,0,0.5); 
-            z-index: 1001; display: none; opacity: 0; transition: opacity 0.3s;
+            z-index: 1001; /* Di atas Header, di bawah Drawer */
+            display: none; opacity: 0; transition: opacity 0.3s;
         }
         .backdrop.active { display: block; opacity: 1; }
 
+        /* Menu Samping */
         .side-drawer {
             position: fixed; top: 0; right: -300px; /* Sembunyi di kanan */
             width: 280px; height: 100vh;
             background: var(--white);
-            z-index: 1002;
-            padding-top: 80px; /* Ruang di atas untuk tombol close */
+            z-index: 1002; /* Di atas Backdrop */
+            padding-top: 80px; 
             transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             display: flex; flex-direction: column;
         }
-        .side-drawer.active { right: 0; } /* Muncul */
+        .side-drawer.active { right: 0; }
 
         .drawer-close-btn {
             position: absolute; top: 1.2rem; right: 5%; 
-            font-size: 1.8rem; color: var(--text-dark); cursor: pointer;
+            font-size: 1.5rem; color: var(--text-dark); cursor: pointer;
         }
 
-        .drawer-link {
+        /* Item Menu Berurutan */
+        .drawer-menu-list { list-style: none; padding: 0; margin: 0; }
+        .drawer-item {
+            display: block;
             padding: 15px 25px; font-size: 1.1rem; font-weight: 600; color: var(--text-dark);
             text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: var(--transition);
         }
-        .drawer-link:hover { background: #f9f9f9; color: var(--accent-toner); padding-left: 30px; }
-        .drawer-link i { margin-right: 10px; width: 20px; }
+        .drawer-item:hover { background: #f9f9f9; color: var(--accent-toner); padding-left: 30px; }
+        .drawer-item i { margin-right: 12px; width: 20px; text-align: center; }
 
         /* --- CARDS & SELECTION --- */
         .hero { text-align: center; padding: 3rem 1rem 1rem; max-width: 800px; margin: 0 auto; }
@@ -154,7 +178,6 @@
         .forum-wrapper { display: grid; grid-template-columns: 1fr 1.5fr; gap: 2rem; align-items: start; }
         .form-card { background: var(--white); padding: 2rem; border-radius: 20px; box-shadow: var(--shadow); position: sticky; top: 100px; }
         .form-group { margin-bottom: 1.2rem; }
-        .form-label { display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--text-dark); }
         .form-input, .form-textarea, .form-select { width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 10px; font-family: 'Poppins', sans-serif; font-size: 0.95rem; transition: var(--transition); }
         .form-input:focus, .form-textarea:focus { outline: none; border-color: #FF6B6B; box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1); }
         .submit-btn { width: 100%; padding: 15px; background: var(--bright-gradient); color: white; border: none; border-radius: 50px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4); }
@@ -197,78 +220,14 @@
             .detail-content { padding: 2rem; } 
             .hero h1 { font-size: 2rem; } 
             
+            /* Hide Desktop Nav */
             nav.desktop-nav { display: none; } 
+            
+            /* Show Mobile Menu Button */
             .mobile-menu-btn { display: block; }
+            
+            /* Show Auth Section on Mobile */
             #auth-section { display: flex; align-items: center; }
-
-            /* --- HEADER & NAVIGATION --- */
-header { 
-    background-color: var(--white); 
-    padding: 1rem 5%; 
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
-    position: sticky; 
-    top: 0; 
-    z-index: 1000; /* Dasar layer */
-}
-
-/* Tombol Menu harus selalu di paling atas agar bisa diklik */
-.mobile-menu-btn { 
-    display: none; 
-    font-size: 1.5rem; 
-    color: var(--text-dark); 
-    cursor: pointer; 
-    background: none; 
-    border: none; 
-    position: relative; 
-    z-index: 1003; /* Lebih tinggi dari backdrop agar tidak tertutup */
-}
-
-/* --- BACKDROP (Latar Hitam) --- */
-.backdrop {
-    position: fixed; 
-    inset: 0; 
-    background: rgba(0,0,0,0.5); 
-    z-index: 1001; /* Di atas Header, di bawah Drawer */
-    display: none; 
-    opacity: 0; 
-    transition: opacity 0.3s;
-}
-.backdrop.active { display: block; opacity: 1; }
-
-/* --- SIDE DRAWER (Menu Samping) --- */
-.side-drawer {
-    position: fixed; 
-    top: 0; 
-    right: -300px; /* Sembunyi di kanan */
-    width: 280px; 
-    height: 100vh;
-    background: var(--white);
-    z-index: 1002; /* Di atas Backdrop */
-    padding-top: 80px; 
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-    display: flex; 
-    flex-direction: column;
-}
-.side-drawer.active { right: 0; }
-
-/* Item Menu Berurutan (List) */
-.drawer-menu-list { list-style: none; padding: 0; margin: 0; }
-.drawer-item {
-    display: block;
-    padding: 15px 25px; 
-    font-size: 1.1rem; 
-    font-weight: 600; 
-    color: var(--text-dark);
-    text-decoration: none; 
-    border-bottom: 1px solid #f0f0f0; 
-    transition: var(--transition);
-}
-.drawer-item:hover { background: #f9f9f9; color: var(--accent-toner); padding-left: 30px; }
-.drawer-item i { margin-right: 12px; width: 20px; text-align: center; }
         }
     </style>
 </head>
@@ -299,25 +258,19 @@ header {
                 </div>
             </div>
 
-            <!-- Mobile Menu Button (Strip 3) -->
+            <!-- Mobile Menu Button (Hanya 1, di sini) -->
             <button class="mobile-menu-btn" onclick="toggleMenu()">
                 <i class="fas fa-bars" id="menu-icon"></i>
             </button>
         </div>
     </header>
 
-       <!-- Bagian Tombol Menu (Strip 3) di Header -->
-    <button class="mobile-menu-btn" onclick="toggleMenu()">
-        <i class="fas fa-bars" id="menu-icon"></i>
-    </button>
-
     <!-- Overlay Latar Belakang (Backdrop) -->
     <div class="backdrop" id="backdrop" onclick="toggleMenu()"></div>
 
     <!-- Side Drawer Menu (Menu Samping) -->
     <div class="side-drawer" id="sideDrawer">
-        <!-- Tombol Close (X) -->
-        <div style="position: absolute; top: 1.2rem; right: 5%; cursor: pointer; font-size: 1.5rem;" onclick="toggleMenu()">
+        <div class="drawer-close-btn" onclick="toggleMenu()">
             <i class="fas fa-times"></i>
         </div>
         
@@ -905,4 +858,3 @@ header {
     </script>
 </body>
 </html>
-
