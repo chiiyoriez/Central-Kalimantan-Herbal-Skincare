@@ -57,22 +57,25 @@
         }
 
         /* Mobile Dropdown Menu (Simple Dropdown, not Overlay) */
-        .mobile-dropdown {
-            display: none;
-            position: absolute;
-            top: 70px;
-            right: 5%;
-            background: var(--white);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            border-radius: 10px;
-            width: 200px;
-            z-index: 999;
-            flex-direction: column;
-            overflow: hidden;
-            animation: slideDown 0.2s ease-out;
-        }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        <!-- Mobile Dropdown Menu -->
+<div class="mobile-dropdown hidden" id="mobileDropdown">
+    
+    <!-- CONTOH: Link Home (Sudah ada) -->
+    <a onclick="navigateTo('home'); toggleMenu()"><i class="fas fa-home"></i> Home</a>
+    
+    <!-- CONTOH: Link Toner (Sudah ada) -->
+    <a onclick="navigateTo('toner'); toggleMenu()"><i class="fas fa-spray-can"></i> Toner</a>
+    
+    <!-- CONTOH: Link Serum (Sudah ada) -->
+    <a onclick="navigateTo('serum'); toggleMenu()"><i class="fas fa-flask"></i> Serum</a>
+    
+    <!-- DISINI: Tambahkan Menu Baru yang Anda Maksud -->
+    <!-- Contoh format: <a onclick="navigateTo('nama-view'); toggleMenu()">Nama Menu</a> -->
+    
+    <a onclick="navigateTo('toner-forum'); toggleMenu()">Diskusi Toner</a>
+    <a onclick="navigateTo('serum-forum'); toggleMenu()">Diskusi Serum</a>
 
+</div>
         .mobile-dropdown a {
             padding: 12px 20px;
             text-decoration: none;
@@ -846,3 +849,4 @@
     </script>
 </body>
 </html>
+
