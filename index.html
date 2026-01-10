@@ -50,7 +50,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
             position: sticky; 
             top: 0; 
-            z-index: 1000; /* Dasar layer */
+            z-index: 1000;
         }
 
         .logo { font-size: 1.5rem; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 10px; cursor: pointer; }
@@ -68,7 +68,7 @@
             cursor: pointer; 
             background: none; 
             border: none; 
-            z-index: 1003; /* Lebih tinggi dari backdrop */
+            z-index: 1003;
             position: relative;
         }
 
@@ -124,10 +124,10 @@
 
         /* --- HOME PAGE SECTIONS --- */
         
-        /* 1. INTRO SECTION (Paling Atas - Padding Diperbesar) */
+        /* 1. INTRO SECTION */
         .hero-intro {
             background: linear-gradient(135deg, #fdfbf7 0%, #e6e6fa 100%);
-            padding: 4rem 1rem 3rem; /* Dari 3.5rem jadi 4rem agar lega */
+            padding: 4rem 1rem 3rem;
             text-align: center;
         }
         .hero-intro h1 { font-size: 3rem; font-weight: 800; color: var(--text-dark); margin-bottom: 1rem; }
@@ -140,11 +140,10 @@
         }
         .btn-scroll:hover { background: var(--accent-toner); transform: scale(1.05); }
 
-               /* 2. SELECTION SECTION (Tengah) */
+        /* 2. SELECTION SECTION (HOME) - RASIO 1022x818 */
         .section-title { text-align: center; font-size: 2rem; margin: 4rem 0 2rem; color: var(--text-dark); }
         .selection-container { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 5%; max-width: 1200px; margin: 0 auto 4rem; flex-grow: 1; }
         
-        /* Kartu Produk: Image Background dengan Teks Overlay */
         .card { 
             background: var(--white); 
             border-radius: 20px; 
@@ -154,34 +153,40 @@
             cursor: pointer; 
             border: 1px solid transparent; 
             position: relative;
-            height: 400px; /* Tinggi kartu fix biar rapi */
+            height: 400px; 
         }
         
         .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
         .toner-card:hover { border-color: var(--accent-toner); }
         .serum-card:hover { border-color: var(--accent-serum); }
 
-        /* --- UPDATE UKURAN GAMBAR (1022x818) --- */
         .card-image { 
             width: 100%;
-            /* Hitung Aspek Rasio: 818 / 1022 = 0.80 (80%) */
+            /* 818 / 1022 = 0.8 = 80% */
             padding-bottom: 80%; 
-            height: 0; /* Ini wajib dijadiin 0 supaya padding menentukan tingginya */
+            height: 0; 
             position: relative; 
             overflow: hidden;
         } 
+        
+        /* Pseudo-element untuk lock rasio Home */
+        .card-image::before {
+            content: "";
+            display: block;
+            padding-top: 80%;
+            width: 100%;
+        }
+
         .card-image img { 
             position: absolute;
             top: 0; left: 0; 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Ini biar gak gepeng tapi full */
+            object-fit: cover; 
             transition: transform 0.5s ease; 
         } 
-        /* Zoom effect saat hover */
         .card:hover .card-image img { transform: scale(1.1); } 
         
-        /* Isi Teks di tengah (Overlay) */
         .card-content { 
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -195,7 +200,6 @@
             z-index: 2;
         }
 
-        /* Teks Putih untuk Kontras Gambar */
         .card h2 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
         .card p { font-size: 1rem; color: #f0f0f0; margin-bottom: 1.5rem; }
         .card-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
@@ -214,21 +218,20 @@
         .toner-card .btn-card { background-color: var(--accent-toner); }
         .serum-card .btn-card { background-color: var(--accent-serum); }
 
-        /* 3. LAB SECTION (DIJADIKAN 2 SELECTION CLICKABLE) */
+        /* 3. LAB SECTION (HOME) */
         .lab-section { 
-            padding: 4rem 5%; /* Dari 2.5rem jadi 4rem agar lega */
+            padding: 4rem 5%; 
             background: var(--white); 
             margin-bottom: 4rem; 
         }
         .lab-grid { 
             display: grid; 
-            grid-template-columns: 1fr 1fr; /* Paksa 2 kolom agar jelas pilihannya */
+            grid-template-columns: 1fr 1fr; 
             gap: 2rem; 
             max-width: 1000px; 
             margin: 2rem auto 0; 
         }
         
-        /* Kartu Lab Besar (Clickable) */
         .lab-item { 
             background: var(--white); 
             padding: 2rem; 
@@ -242,12 +245,11 @@
             align-items: center; 
             justify-content: center;
             box-shadow: var(--shadow);
-            height: 250px; /* Tinggi fixed agar rapi */
+            height: 250px; 
             position: relative; 
             overflow: hidden;
         }
         
-        /* Efek Hover */
         .lab-item:hover { 
             transform: translateY(-5px); 
             box-shadow: 0 15px 35px rgba(0,0,0,0.12); 
@@ -255,10 +257,9 @@
         .toner-lab-item:hover { border-color: var(--accent-toner); }
         .serum-lab-item:hover { border-color: var(--accent-serum); }
         
-        /* Gambar Background Kartu Lab */
         .lab-bg-img {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            object-fit: cover; opacity: 0.1; z-index: 1; /* Gambar tipis dibelakang */
+            object-fit: cover; opacity: 0.1; z-index: 1;
         }
         .lab-item:hover .lab-bg-img { opacity: 0.2; }
 
@@ -270,7 +271,7 @@
         .lab-item p { font-size: 1rem; color: var(--text-light); z-index: 2; position: relative; }
         
         .btn-lab-view {
-            margin-top: auto; /* Dorong ke bawah */
+            margin-top: auto; 
             z-index: 3;
             padding: 10px 25px; 
             border-radius: 50px; 
@@ -285,9 +286,9 @@
         .serum-lab-item .btn-lab-view { color: var(--accent-serum); border-color: var(--accent-serum); }
         .serum-lab-item .btn-lab-view:hover { background: var(--accent-serum); color: white; }
 
-        /* 4. TESTIMONI SECTION (Padding Diperbesar) */
+        /* 4. TESTIMONI SECTION */
         .testi-section { 
-            padding: 4rem 5%; /* Dari 2.5rem jadi 4rem agar lega */
+            padding: 4rem 5%; 
             max-width: 1200px; 
             margin: 0 auto; 
         }
@@ -313,23 +314,21 @@
         .auth-switch { margin-top: 1rem; font-size: 0.9rem; }
         .auth-switch a { color: var(--accent-toner); font-weight: 600; text-decoration: none; cursor: pointer; }
 
-                /* --- PRODUCT & FORUM (FIXED RASIO 513x411) --- */
+        /* --- PRODUCT & FORUM --- */
         .product-page { padding: 2rem 5%; max-width: 1200px; margin: 0 auto 4rem; flex-grow: 1; }
         .detail-container { display: flex; flex-wrap: wrap; background: var(--white); border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); }
         
-        /* Detail Image - PERBAIKAN RASIO KE 80.12% (411/513) */
+        /* Detail Image - RASIO 513x411 (80.12%) */
         .detail-image { 
             flex: 1 1 400px; 
-            height: 0; /* Wajib 0 supaya padding bekerja */
-            padding-bottom: 80.12%; /* 411 dibagi 513 = 0.8012 (80.12%) */
+            height: 0; 
+            padding-bottom: 80.12%; 
             position: relative; 
             background: #fff;
             padding: 10px;
-            /* Hapus min-height jika ada di kode lama biar gak konflik */
-            min-height: 400px; /* Supaya minimal tinggi rapi */
+            min-height: 400px; 
         } 
 
-        /* Pseudo-element untuk lock rasio */
         .detail-image::before {
             content: "";
             display: block;
@@ -342,7 +341,7 @@
             top: 0; left: 0; 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Wajib cover */
+            object-fit: cover; 
         }
         
         .detail-content { flex: 1 1 400px; padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
@@ -356,49 +355,43 @@
         .action-btn { width: 100%; padding: 15px; border: none; border-radius: 50px; color: rgb(0, 0, 0); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); text-align: center; display: block; }
         .action-btn:hover { opacity: 0.9; transform: scale(1.02); }
         
-                /* --- LAB DETAIL SPECIFIC STYLES --- */
-        
-        /* Grid Foto - DIUBAH AGAR AUTO HEIGHT (TIDAK CROP) */
+        /* --- LAB DETAIL SPECIFIC STYLES (AUTO HEIGHT) --- */
         .lab-photo-grid {
             display: flex;
-            flex-direction: column; /* Numpuk ke bawah */
-            gap: 10px; /* Jarak antar container */
+            flex-direction: column; 
+            gap: 10px; 
             height: 100%;
-            overflow-y: auto; /* Scroll jika melebihi ketinggian layar */
+            overflow-y: auto; 
             padding: 10px;
             background-color: #f9f9f9;
-            align-items: center; /* Center gambar */
+            align-items: center; 
         }
         
         .lab-photo-item {
             width: 100%;
-            /* HILANGKAN HEIGHT FIX */
-            height: auto; /* Tinggi mengikuti isi gambar (396px, 156px, dll) */
+            height: auto; /* AUTO HEIGHT - TIDAK CROP */
             position: relative; 
             border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
             border: 2px solid transparent;
             transition: var(--transition);
-            margin-bottom: 20px; /* Jarak untuk caption di bawah */
-            max-width: 600px; /* Batasi lebar maksimal agar rapi */
+            margin-bottom: 20px; 
+            max-width: 600px; 
+            background: #fff;
         }
-
         .lab-photo-item:hover { border-color: var(--accent-toner); }
         
         .lab-photo-item img {
             width: 100%; 
-            /* HILANGKAN HEIGHT FIX */
-            height: auto; /* Penting agar tidak crop */
-            object-fit: contain; /* Pastikan gambar terlihat penuh */
+            height: auto; /* AUTO HEIGHT */
+            object-fit: contain; 
             display: block; 
             transition: transform 0.3s;
         }
-        .lab-photo-item:hover img { transform: scale(1.02); } /* Sedikit zoom efek */
+        .lab-photo-item:hover img { transform: scale(1.02); }
 
-        /* Keterangan Foto (Caption) */
         .lab-photo-caption {
-            /* DIUBAH: Tidak lagi overlap negatif, tapi ada margin positif */
             margin-top: 10px; 
             z-index: 2;
             position: relative;
@@ -426,7 +419,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
         }
         .lab-table th {
-            background-color: var(--primary-bg); /* Match theme */
+            background-color: var(--primary-bg);
             color: var(--text-dark);
             font-weight: 700;
             padding: 12px;
@@ -481,7 +474,7 @@
         /* FOOTER UPDATED */
         footer { 
             background-color: var(--white); 
-            padding: 2.5rem 2rem; /* Padding standar agar lega */
+            padding: 2.5rem 2rem; 
             text-align: center; 
             border-top: 1px solid #eee; 
             margin-top: auto; 
@@ -511,12 +504,10 @@
             .mobile-menu-btn { display: block; }
             #auth-section { display: flex; align-items: center; }
             
-            /* Mobile Card adjustments */
-            .card { height: 350px; } /* Sedikit lebih pendek di HP */
+            .card { height: 350px; } 
             .card h2 { font-size: 1.6rem; }
             .card p { font-size: 0.9rem; }
             
-            /* Mobile Lab Grid adjustments */
             .lab-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -583,22 +574,21 @@
         </div>
     </div>
 
-    <!-- VIEW 1: HOME (DIUBAH MENJADI SCROLL) -->
+    <!-- VIEW 1: HOME -->
     <main id="view-home" class="fade-in">
         
-        <!-- 1. INTRO SECTION (Paling Atas) -->
+        <!-- 1. INTRO SECTION -->
         <section class="hero-intro">
             <h1>GlowSkin <span>Indonesia</span></h1>
             <p>Solusi skincare alami dan terpercaya untuk merawat kecantikan sejati Anda. Dapatkan kulit sehat, bercahaya, dan penuh percaya diri.</p>
             <button class="btn-scroll" onclick="scrollToProducts()">Pilih Perawatan <i class="fas fa-chevron-down"></i></button>
         </section>
 
-               <!-- 2. SELECTION SECTION (Tengah) - UPDATE GAMBAR -->
+        <!-- 2. SELECTION SECTION (Tengah) -->
         <section id="products-section">
             <div class="selection-container">
                 <!-- Card Toner -->
                 <article class="card toner-card" onclick="navigateTo('toner')">
-                    <!-- GANTI src="..." MENGGUNAKAN FOTO UKURAN 1022x818 -->
                     <div class="card-image">
                         <img src="KIR/bawi toner/WhatsApp Image 2026-01-08 at 21.48.36.jpg" alt="Bawi Toner">
                     </div>
@@ -612,7 +602,6 @@
                 
                 <!-- Card Serum -->
                 <article class="card serum-card" onclick="navigateTo('serum')">
-                    <!-- GANTI src="..." MENGGUNAKAN FOTO UKURAN 1022x818 -->
                     <div class="card-image">
                         <img src="KIR/tabela serum/tabela logo.png" alt="Tabela Serum">
                     </div>
@@ -633,7 +622,6 @@
                 
                 <!-- PILIHAN 1: UJI LAB TONER -->
                 <article class="lab-item toner-lab-item" onclick="navigateTo('lab-toner')">
-                    <!-- Background Image (Optional generic lab bg) -->
                     <img src="https://picsum.photos/seed/lab/600/600" class="lab-bg-img" alt="Lab">
                     
                     <i class="fas fa-microscope lab-icon"></i>
@@ -656,7 +644,7 @@
             </div>
         </section>
 
-        <!-- 4. TESTIMONI SECTION (Paling Bawah) -->
+        <!-- 4. TESTIMONI SECTION -->
         <section class="testi-section">
             <h2 class="section-title">Kata Mereka</h2>
             <div class="testi-grid">
@@ -719,7 +707,7 @@
         </div>
     </section>
 
-        <!-- VIEW 8: LAB TONER DETAIL (UPDATED AUTO HEIGHT) -->
+    <!-- VIEW 8: LAB TONER DETAIL (AUTO HEIGHT) -->
     <section id="view-lab-toner" class="product-page hidden fade-in">
         <div class="detail-container">
             <!-- FOTO VERTICAL STACK (KIRI) -->
@@ -818,38 +806,38 @@
         </div>
     </section>
 
-    <!-- VIEW 9: LAB SERUM DETAIL (UPDATED AUTO HEIGHT) -->
+    <!-- VIEW 9: LAB SERUM DETAIL (AUTO HEIGHT) -->
     <section id="view-lab-serum" class="product-page hidden fade-in">
         <div class="detail-container">
             <!-- FOTO VERTICAL STACK (KIRI) -->
             <div class="detail-image" style="padding: 10px;">
                 <div class="lab-photo-grid">
-                    <!-- Foto 1 (720x396) -->
+                    <!-- Foto 1 (720x521) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 1.jpeg" width="100%" height="auto" alt="Foto 1">
                         <div class="lab-photo-caption">Visual Produk (Serum)</div>
                     </div>
-                    <!-- Foto 2 (720x322) -->
+                    <!-- Foto 2 (720x337) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 2.jpeg" width="100%" height="auto" alt="Foto 2">
                         <div class="lab-photo-caption">Sampel Uji UV-Vis</div>
                     </div>
-                    <!-- Foto 3 (720x396) -->
+                    <!-- Foto 3 (720x541) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/gambar 2.jpeg" width="100%" height="auto" alt="Foto 3">
                         <div class="lab-photo-caption">Grafik Brightening (ITA)</div>
                     </div>
-                    <!-- Foto 4 (720x271) -->
+                    <!-- Foto 4 (720x349) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 3.jpeg" width="100%" height="auto" alt="Foto 4">
                         <div class="lab-photo-caption">Alat Viscositas</div>
                     </div>
-                    <!-- Foto 5 (720x156) -->
+                    <!-- Foto 5 (720x482) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/gambar 3.jpeg" width="100%" height="auto" alt="Foto 5">
                         <div class="lab-photo-caption">Hasil Uji Mikroba</div>
                     </div>
-                    <!-- Foto 6 (720x330) -->
+                    <!-- Foto 6 (720x461) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 4 dan 5.jpeg" width="100%" height="auto" alt="Foto 6">
                         <div class="lab-photo-caption">Sertifikat Halal & BPOM</div>
@@ -994,7 +982,6 @@
         <div class="auth-container">
             <h2>Login Akun</h2>
             <p style="font-size:0.8rem; color:#888; margin-bottom:1rem;">
-            
                 Gunakan email <strong>admin@glowskin.com</strong> untuk login sebagai Admin.
             </p>
             <form onsubmit="handleLogin(event)">
@@ -1228,8 +1215,8 @@
                 'view-serum', 
                 'view-toner-forum', 
                 'view-serum-forum', 
-                'view-lab-toner', // <--- Tambahkan ini
-                'view-lab-serum', // <--- Tambahkan ini
+                'view-lab-toner', 
+                'view-lab-serum', 
                 'view-login', 
                 'view-register'
             ];
@@ -1244,11 +1231,9 @@
                 document.getElementById('view-serum').classList.remove('hidden');
             } 
             else if (viewName === 'lab-toner') {
-                // Tampilkan Halaman Lab Toner
                 document.getElementById('view-lab-toner').classList.remove('hidden');
             } 
             else if (viewName === 'lab-serum') {
-                // Tampilkan Halaman Lab Serum
                 document.getElementById('view-lab-serum').classList.remove('hidden');
             } 
             else if (viewName === 'toner-forum') {
@@ -1465,21 +1450,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
