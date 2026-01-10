@@ -211,18 +211,76 @@
         .toner-card .btn-card { background-color: var(--accent-toner); }
         .serum-card .btn-card { background-color: var(--accent-serum); }
 
-        /* 3. LAB SECTION (Padding Diperbesar) */
+        /* 3. LAB SECTION (DIJADIKAN 2 SELECTION CLICKABLE) */
         .lab-section { 
             padding: 4rem 5%; /* Dari 2.5rem jadi 4rem agar lega */
             background: var(--white); 
             margin-bottom: 4rem; 
         }
-        .lab-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: 2rem auto 0; }
-        .lab-item { text-align: center; padding: 2rem; border: 1px solid #eee; border-radius: 15px; transition: var(--transition); }
-        .lab-item:hover { background: #fdfbf7; border-color: var(--accent-toner); }
-        .lab-icon { font-size: 2.5rem; color: var(--accent-toner); margin-bottom: 1rem; }
-        .lab-item h3 { margin-bottom: 0.5rem; font-size: 1.2rem; }
-        .lab-item p { font-size: 0.9rem; color: var(--text-light); }
+        .lab-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; /* Paksa 2 kolom agar jelas pilihannya */
+            gap: 2rem; 
+            max-width: 1000px; 
+            margin: 2rem auto 0; 
+        }
+        
+        /* Kartu Lab Besar (Clickable) */
+        .lab-item { 
+            background: var(--white); 
+            padding: 2rem; 
+            border: 1px solid #eee; 
+            border-radius: 20px; 
+            text-align: center; 
+            transition: var(--transition); 
+            cursor: pointer; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            box-shadow: var(--shadow);
+            height: 250px; /* Tinggi fixed agar rapi */
+            position: relative; 
+            overflow: hidden;
+        }
+        
+        /* Efek Hover */
+        .lab-item:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12); 
+        }
+        .toner-lab-item:hover { border-color: var(--accent-toner); }
+        .serum-lab-item:hover { border-color: var(--accent-serum); }
+        
+        /* Gambar Background Kartu Lab */
+        .lab-bg-img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; opacity: 0.1; z-index: 1; /* Gambar tipis dibelakang */
+        }
+        .lab-item:hover .lab-bg-img { opacity: 0.2; }
+
+        .lab-icon { font-size: 3rem; margin-bottom: 1rem; z-index: 2; position: relative; }
+        .toner-lab-item .lab-icon { color: var(--accent-toner); }
+        .serum-lab-item .lab-icon { color: var(--accent-serum); }
+        
+        .lab-item h3 { margin-bottom: 0.5rem; font-size: 1.5rem; z-index: 2; position: relative; }
+        .lab-item p { font-size: 1rem; color: var(--text-light); z-index: 2; position: relative; }
+        
+        .btn-lab-view {
+            margin-top: auto; /* Dorong ke bawah */
+            z-index: 3;
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            border: 2px solid; 
+            font-weight: 700; 
+            cursor: pointer; 
+            transition: var(--transition);
+        }
+        .toner-lab-item .btn-lab-view { color: var(--accent-toner); border-color: var(--accent-toner); }
+        .toner-lab-item .btn-lab-view:hover { background: var(--accent-toner); color: white; }
+        
+        .serum-lab-item .btn-lab-view { color: var(--accent-serum); border-color: var(--accent-serum); }
+        .serum-lab-item .btn-lab-view:hover { background: var(--accent-serum); color: white; }
 
         /* 4. TESTIMONI SECTION (Padding Diperbesar) */
         .testi-section { 
@@ -255,7 +313,14 @@
         /* --- PRODUCT & FORUM --- */
         .product-page { padding: 2rem 5%; max-width: 1200px; margin: 0 auto 4rem; flex-grow: 1; }
         .detail-container { display: flex; flex-wrap: wrap; background: var(--white); border-radius: 30px; overflow: hidden; box-shadow: var(--shadow); }
-        .detail-image { flex: 1 1 400px; height: 500px; position: relative; }
+        .detail-image { 
+            flex: 1 1 400px; 
+            min-height: 500px; /* Tinggi minimal */
+            height: auto; /* Biar tumbuh sesuai konten */
+            position: relative; 
+            background: #fff;
+            padding: 10px; /* Gap biar rapi */
+        } 
         .detail-image img { width: 100%; height: 100%; object-fit: cover; }
         .detail-content { flex: 1 1 400px; padding: 3rem; display: flex; flex-direction: column; justify-content: center; }
         .back-btn { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 1.5rem; color: var(--text-light); text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
@@ -267,6 +332,82 @@
         .feature-item { display: flex; align-items: center; gap: 10px; font-weight: 500; }
         .action-btn { width: 100%; padding: 15px; border: none; border-radius: 50px; color: rgb(0, 0, 0); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); text-align: center; display: block; }
         .action-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+        /* --- LAB DETAIL SPECIFIC STYLES (VERTICAL STACK) --- */
+        /* Grid Foto - DIUBAH JADI VERTICAL STACK */
+        .lab-photo-grid {
+            display: flex;
+            flex-direction: column; /* Numpuk ke bawah */
+            gap: 15px; /* Jarak antar foto */
+            height: 100%;
+            overflow-y: auto; /* Scroll jika melebihi ketinggian layar */
+            padding: 10px;
+            background-color: #f9f9f9;
+            align-items: center; /* Center gambar */
+        }
+        
+        .lab-photo-item {
+            width: 100%;
+            /* Tinggi fixed agar rapi seperti masonry */
+            height: 250px; 
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition);
+        }
+        .lab-photo-item:hover { border-color: var(--accent-toner); }
+        
+        .lab-photo-item img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;
+        }
+        .lab-photo-item:hover img { transform: scale(1.05); }
+
+        /* Keterangan Foto (Caption) */
+        .lab-photo-caption {
+            margin-top: -30px; /* Tarik ke atas sedikit agar overlap dengan gambar */
+            margin-bottom: 20px; /* Jarak ke foto berikutnya */
+            z-index: 2;
+            position: relative;
+            background: rgba(255, 255, 255, 0.95); /* Background putih transparan */
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: max-content; /* Lebar sesuai teks */
+            text-align: center;
+            border: 1px solid #eee;
+        }
+
+        /* Tabel Hasil Lab */
+        .lab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .lab-table th {
+            background-color: var(--primary-bg); /* Match theme */
+            color: var(--text-dark);
+            font-weight: 700;
+            padding: 12px;
+            text-align: left;
+            border-bottom: 2px solid #ddd;
+        }
+        .lab-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #eee;
+            color: var(--text-light);
+        }
+        .lab-table tr:last-child td { border-bottom: none; }
+        .lab-table td.result-pass { color: var(--accent-me); font-weight: 600; }
 
         /* FORUM UI */
         .qa-feed-header { margin-bottom: 1.5rem; padding-bottom:1rem; border-bottom: 2px solid #eee; }
@@ -342,6 +483,9 @@
             .card { height: 350px; } /* Sedikit lebih pendek di HP */
             .card h2 { font-size: 1.6rem; }
             .card p { font-size: 0.9rem; }
+            
+            /* Mobile Lab Grid adjustments */
+            .lab-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -444,25 +588,33 @@
             </div>
         </section>
 
-        <!-- 3. LAB RESULTS SECTION (Bawah Tengah) -->
+        <!-- 3. LAB SECTION (DIJADIKAN 2 SELECTION CLICKABLE) -->
         <section class="lab-section">
             <h2 class="section-title">Teruji Klinis & Aman</h2>
             <div class="lab-grid">
-                <div class="lab-item">
+                
+                <!-- PILIHAN 1: UJI LAB TONER -->
+                <article class="lab-item toner-lab-item" onclick="navigateTo('lab-toner')">
+                    <!-- Background Image (Optional generic lab bg) -->
+                    <img src="https://picsum.photos/seed/lab/600/600" class="lab-bg-img" alt="Lab">
+                    
                     <i class="fas fa-microscope lab-icon"></i>
-                    <h3>Lulus Uji Lab</h3>
-                    <p>Telah melewati serangkaian tes keamanan dermatologi.</p>
-                </div>
-                <div class="lab-item">
-                    <i class="fas fa-leaf lab-icon"></i>
-                    <h3>100% Alami</h3>
-                    <p>Terbuat dari ekstrak tanaman pilihan tanpa bahan kimia berbahaya.</p>
-                </div>
-                <div class="lab-item">
-                    <i class="fas fa-shield-alt lab-icon"></i>
-                    <h3>BPOM Halal</h3>
-                    <p>Terdaftar dan diakui aman untuk pemakaian jangka panjang.</p>
-                </div>
+                    <h3>Hasil Uji Lab Toner</h3>
+                    <p>Analisa keamanan dan efektivitas Bawi Toner.</p>
+                    
+                    <div class="btn-lab-view">Lihat Data Toner</div>
+                </article>
+                
+                <!-- PILIHAN 2: UJI LAB SERUM -->
+                <article class="lab-item serum-lab-item" onclick="navigateTo('lab-serum')">
+                    <img src="https://picsum.photos/seed/lab2/600/600" class="lab-bg-img" alt="Lab">
+                    
+                    <i class="fas fa-flask lab-icon"></i>
+                    <h3>Hasil Uji Lab Serum</h3>
+                    <p>Analisa komposisi Vitamin C dan efektivitas Tabela Serum.</p>
+                    
+                    <div class="btn-lab-view">Lihat Data Serum</div>
+                </article>
             </div>
         </section>
 
@@ -525,6 +677,206 @@
                     <div class="feature-item"><i class="fas fa-check-circle"></i> 10ml</div>
                 </div>
                 <button class="action-btn" onclick="navigateTo('serum-forum')">Lihat Diskusi Serum</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIEW 8: LAB TONER DETAIL (VERTICAL STACK + CAPTION) -->
+    <section id="view-lab-toner" class="product-page hidden fade-in">
+        <div class="detail-container">
+            <!-- FOTO VERTICAL STACK (KIRI) -->
+            <div class="detail-image">
+                <div class="lab-photo-grid">
+                    <!-- Foto 1 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/lab1/800/600" alt="Foto 1">
+                        <div class="lab-photo-caption">Visual Produk (Toner)</div>
+                    </div>
+                    <!-- Foto 2 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/lab2/800/600" alt="Foto 2">
+                        <div class="lab-photo-caption">Sampel Uji Mikrobiologi</div>
+                    </div>
+                    <!-- Foto 3 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/lab3/800/600" alt="Foto 3">
+                        <div class="lab-photo-caption">Tabel Hasil pH</div>
+                    </div>
+                    <!-- Foto 4 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/lab4/800/600" alt="Foto 4">
+                        <div class="lab-photo-caption">Hasil Uji Iritasi (Patch)</div>
+                    </div>
+                    <!-- Foto 5 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/lab5/800/600" alt="Foto 5">
+                        <div class="lab-photo-caption">Analisa HPLC</div>
+                    </div>
+                    <!-- Foto 6 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/lab6/800/600" alt="Foto 6">
+                        <div class="lab-photo-caption">Deklarasi Lulus (BPOM)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="detail-content">
+                <div class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Kembali ke Menu</div>
+                <h2 style="color: var(--accent-toner-dark);">Laporan Uji Lab Bawi Toner</h2>
+                <div style="display: inline-block; padding: 5px 15px; background: #e0e0e0; border-radius: 5px; margin-bottom: 2rem; font-size: 0.9rem;">
+                    <i class="fas fa-calendar-alt"></i> Tes: 15 Januari 2025
+                </div>
+                <p class="detail-desc">
+                    Bawi Toner telah melalui serangkaian tes dermatologi dan mikrobiologi yang ketat. Produk dinyatakan **AMAN** untuk penggunaan jangka panjang pada kulit berjerawat dan sensitif.
+                </p>
+
+                <!-- 6 TABEL HASIL UJI LAB -->
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--text-dark);">Data Hasil Uji Laboratorium</h3>
+
+                <!-- Tabel 1: pH -->
+                <table class="lab-table">
+                    <tr><th>Parameter</th><th>Hasil</th></tr>
+                    <tr><td>pH Larutan</td><td class="result-pass">4.5 (Sangat Cocok)</td></tr>
+                    <tr><td>pH Kulit Setelah Aplikasi</td><td>5.5</td></tr>
+                </table>
+
+                <!-- Tabel 2: Mikrobiologi -->
+                <table class="lab-table">
+                    <tr><th>Uji Bakteri</th><th>Hasil</th></tr>
+                    <tr><td>Total Plate Count (TPC)</td><td class="result-pass">< 100 CFU/g (Sangat Aman)</td></tr>
+                    <tr><td>Patogen (Staphylococcus, dll)</td><td class="result-pass">Tidak Ditemukan</td></tr>
+                </table>
+
+                <!-- Tabel 3: Iritasi Kulit -->
+                <table class="lab-table">
+                    <tr><th>Tes Iritasi</th><th>Hasil</th></tr>
+                    <tr><td>Uji Patch (48 Jam)</td><td class="result-pass">Tanpa Eritasi (Score: 0)</td></tr>
+                    <tr><td>Uji Mata Kelinci (Draize)</td><td class="result-pass">Non-Iritant</td></tr>
+                </table>
+
+                <!-- Tabel 4: Analisa Kandungan -->
+                <table class="lab-table">
+                    <tr><th>Komponen</th><th>Kadar (%)</th></tr>
+                    <tr><td>Ekstrak Bajakah</td><td>5%</td></tr>
+                    <tr><td>Ekstrak Bawang Putih</td><td>3%</td></tr>
+                    <tr><td>Air Daun Pandan</td><td>92%</td></tr>
+                </table>
+
+                <!-- Tabel 5: Stabilitas -->
+                <table class="lab-table">
+                    <tr><th>Suhu Penyimpanan</th><th>Ketentuan</th></tr>
+                    <tr><td>40°C ± 2°C</td><td class="result-pass">Stabil 6 Bulan</td></tr>
+                </table>
+
+                <!-- Tabel 6: Kesimpulan Akhir -->
+                <table class="lab-table">
+                    <tr><th>Kesimpulan</th><th>Status</th></tr>
+                    <tr><td>Aman untuk penggunaan luar</td><td class="result-pass">LULUS</td></tr>
+                    <tr><td>Aman untuk kulit sensitif</td><td class="result-pass">LULUS</td></tr>
+                </table>
+
+                <button class="action-btn" style="background-color: var(--accent-toner); margin-top: 1rem;" onclick="navigateTo('toner')">Pesan Bawi Toner</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIEW 9: LAB SERUM DETAIL (VERTICAL STACK + CAPTION) -->
+    <section id="view-lab-serum" class="product-page hidden fade-in">
+        <div class="detail-container">
+            <!-- FOTO VERTICAL STACK (KIRI) -->
+            <div class="detail-image">
+                <div class="lab-photo-grid">
+                    <!-- Foto 1 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/serum1/800/600" alt="Foto 1">
+                        <div class="lab-photo-caption">Visual Produk (Serum)</div>
+                    </div>
+                    <!-- Foto 2 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/serum2/800/600" alt="Foto 2">
+                        <div class="lab-photo-caption">Sampel Uji UV-Vis</div>
+                    </div>
+                    <!-- Foto 3 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/serum3/800/600" alt="Foto 3">
+                        <div class="lab-photo-caption">Grafik Brightening (ITA)</div>
+                    </div>
+                    <!-- Foto 4 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/serum4/800/600" alt="Foto 4">
+                        <div class="lab-photo-caption">Alat Viscositas</div>
+                    </div>
+                    <!-- Foto 5 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/serum5/800/600" alt="Foto 5">
+                        <div class="lab-photo-caption">Hasil Uji Mikroba</div>
+                    </div>
+                    <!-- Foto 6 -->
+                    <div class="lab-photo-item">
+                        <img src="https://picsum.photos/seed/serum6/800/600" alt="Foto 6">
+                        <div class="lab-photo-caption">Sertifikat Halal & BPOM</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="detail-content">
+                <div class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Kembali ke Menu</div>
+                <h2 style="color: var(--accent-serum-dark);">Laporan Uji Lab Tabela Serum</h2>
+                <div style="display: inline-block; padding: 5px 15px; background: #e0e0e0; border-radius: 5px; margin-bottom: 2rem; font-size: 0.9rem;">
+                    <i class="fas fa-calendar-alt"></i> Tes: 20 Januari 2025
+                </div>
+                <p class="detail-desc">
+                    Tabela Serum diformulasikan dengan konsentrasi Vitamin C yang stabil. Uji laboratorium mengonfirmasi stabilitas kandungan dan efektivitas pencerahan tanpa iritasi signifikan.
+                </p>
+
+                <!-- 6 TABEL HASIL UJI LAB -->
+                <h3 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--text-dark);">Data Hasil Uji Laboratorium</h3>
+
+                <!-- Tabel 1: Stabilitas Vitamin C -->
+                <table class="lab-table">
+                    <tr><th>Metode</th><th>Kadar Awal</th><th>Kadar Akhir (30 Hari)</th></tr>
+                    <tr><td>Spektrofotometri (UV)</td><td>20%</td><td class="result-pass">19.8% (Stabil)</td></tr>
+                    <tr><td>Metode HPLC</td><td>20%</td><td class="result-pass">20.1% (Stabil)</td></tr>
+                </table>
+
+                <!-- Tabel 2: Uji Brightening -->
+                <table class="lab-table">
+                    <tr><th>Indeks Kecerahan</th><th>Subjek (n=50)</th><th>Peningkatan</th></tr>
+                    <tr><td>ITA (L*)</td><td>50</td><td class="result-pass">+15.2%</td></tr>
+                    <tr><td>ITA (a*)</td><td>50</td><td class="result-pass">+14.8%</td></tr>
+                </table>
+
+                <!-- Tabel 3: Uji Kelembapan -->
+                <table class="lab-table">
+                    <tr><th>Parameter</th><th>Nilai</th></tr>
+                    <tr><td>Viskositas (cps)</td><td>5,500</td></tr>
+                    <tr><td>Konsistensi (Pas)</td><td class="result-pass">Lulus</td></tr>
+                    <tr><td>Penyebaran (cm)</td><td>5.5</td></tr>
+                </table>
+
+                <!-- Tabel 4: Tantangan Mikroba -->
+                <table class="lab-table">
+                    <tr><th>Mikroba</th><th>Batas Maksimum (log CFU)</th><th>Hasil</th></tr>
+                    <tr><td>Total Aerob</td><td>10^3</td><td class="result-pass">< 10 CFU</td></tr>
+                    <tr><td>Yeast & Mold</td><td>10^2</td><td class="result-pass">< 10 CFU</td></tr>
+                    <tr><td>E. Coli</td><td>10</td><td class="result-pass">Negatif</td></tr>
+                </table>
+
+                <!-- Tabel 5: Uji Iritasi -->
+                <table class="lab-table">
+                    <tr><th>Tes</th><th>Skor (0-4)</th><th>Status</th></tr>
+                    <tr><td>Eritasi Primer (Draize)</td><td>0</td><td class="result-pass">Non-Iritant</td></tr>
+                    <tr><td>Sensitifitas Kulit (Erythema)</td><td>0.5</td><td class="result-pass">Minimal</td></tr>
+                </table>
+
+                <!-- Tabel 6: Status BPOM -->
+                <table class="lab-table">
+                    <tr><th>Dokumen</th><th>Status</th></tr>
+                    <tr><td>Nomor Notifikasi</td><td class="result-pass">NA 18202001234</td></tr>
+                    <tr><td>Cara Penyajaman</td><td class="result-pass">Aman Digunakan</td></tr>
+                </table>
+
+                <button class="action-btn" style="background-color: var(--accent-serum); margin-top: 1rem;" onclick="navigateTo('serum')">Pesan Tabela Serum</button>
             </div>
         </div>
     </section>
@@ -831,26 +1183,57 @@
             const drawer = document.getElementById('sideDrawer');
             if(drawer.classList.contains('active')) toggleMenu();
 
-            const views = ['view-home', 'view-toner', 'view-serum', 'view-toner-forum', 'view-serum-forum', 'view-login', 'view-register'];
+            const views = [
+                'view-home', 
+                'view-toner', 
+                'view-serum', 
+                'view-toner-forum', 
+                'view-serum-forum', 
+                'view-lab-toner', // <--- Tambahkan ini
+                'view-lab-serum', // <--- Tambahkan ini
+                'view-login', 
+                'view-register'
+            ];
+
+            // Sembunyikan semua
             views.forEach(id => document.getElementById(id).classList.add('hidden'));
 
-            if (viewName === 'toner') document.getElementById('view-toner').classList.remove('hidden');
-            else if (viewName === 'serum') document.getElementById('view-serum').classList.remove('hidden');
+            if (viewName === 'toner') {
+                document.getElementById('view-toner').classList.remove('hidden');
+            } 
+            else if (viewName === 'serum') {
+                document.getElementById('view-serum').classList.remove('hidden');
+            } 
+            else if (viewName === 'lab-toner') {
+                // Tampilkan Halaman Lab Toner
+                document.getElementById('view-lab-toner').classList.remove('hidden');
+            } 
+            else if (viewName === 'lab-serum') {
+                // Tampilkan Halaman Lab Serum
+                document.getElementById('view-lab-serum').classList.remove('hidden');
+            } 
             else if (viewName === 'toner-forum') {
                 document.getElementById('view-toner-forum').classList.remove('hidden');
                 renderFeed('Bawi Toner');
-            } else if (viewName === 'serum-forum') {
+            } 
+            else if (viewName === 'serum-forum') {
                 document.getElementById('view-serum-forum').classList.remove('hidden');
                 renderFeed('Tabela Serum');
-            } else if (viewName === 'login') {
+            } 
+            else if (viewName === 'login') {
                 if(currentUser) { alert("Anda sudah login!"); return; }
                 document.getElementById('view-login').classList.remove('hidden');
-            } else if (viewName === 'register') {
+            } 
+            else if (viewName === 'register') {
                 if(currentUser) { alert("Anda sudah login!"); return; }
                 document.getElementById('view-register').classList.remove('hidden');
-            } else {
+            } 
+            else {
+                // Default: Home
                 document.getElementById('view-home').classList.remove('hidden');
             }
+            
+            // Scroll ke atas
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
@@ -1043,5 +1426,3 @@
     </script>
 </body>
 </html>
-
-
