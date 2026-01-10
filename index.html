@@ -491,17 +491,65 @@
         }
         .social-links a:hover { color: var(--accent-toner); transform: scale(1.2); }
 
-        /* --- TEAM SECTION (TIM KAMI) --- */
+                /* --- TEAM SECTION (TIM KAMI) --- */
         .team-section {
             background: var(--white);
             padding: 4rem 5%;
             margin-bottom: 2rem;
             text-align: center;
         }
+
+        /* 1. SUPERVISOR CARD (PAKING TENGAH ATAS) */
+        .supervisor-card {
+            background: linear-gradient(135deg, var(--white) 0%, #fff9e6 100%); /* Efek glowing halus */
+            border: 2px solid var(--admin-color); /* Border Orange */
+            border-radius: 25px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto 4rem; /* Jarak ke tim di bawah */
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 15px 40px rgba(255, 152, 0, 0.15); /* Shadow orange */
+            position: relative;
+        }
+
+        .supervisor-avatar {
+            width: 120px; /* Foto lebih besar dari anggota */
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--admin-color);
+            flex-shrink: 0;
+        }
+
+        .supervisor-info { text-align: left; }
+        .supervisor-name { font-size: 1.8rem; font-weight: 800; color: var(--text-dark); margin-bottom: 0.5rem; }
+        .supervisor-role { font-size: 1.1rem; color: var(--admin-color); font-weight: 700; }
         
+        /* Crown Icon buat Supervisor */
+        .supervisor-crown {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--admin-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+
+        /* 2. TEAM GRID (UNTUK 2 TIM) */
         .team-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; /* 2 Kolom */
             gap: 3rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -518,14 +566,52 @@
             font-size: 1.8rem;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             position: relative;
             display: inline-block;
         }
         
-        .toner-column .team-title { border-bottom: 4px solid var(--accent-toner); padding-bottom: 0.5rem; }
-        .serum-column .team-title { border-bottom: 4px solid var(--accent-serum); padding-bottom: 0.5rem; }
+        /* Garis bawah berbeda warna tiap tim */
+        .toner-column .team-title { border-bottom: 5px solid var(--accent-toner); padding-bottom: 0.5rem; }
+        .serum-column .team-title { border-bottom: 5px solid var(--accent-serum); padding-bottom: 0.5rem; }
 
+        /* Kartu Member (Updated biar muat 4 orang numpuk) */
+        .member-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            padding: 1.5rem;
+            width: 100%; /* Full width kolom */
+            max-width: 400px;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: default;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .member-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid transparent;
+            flex-shrink: 0;
+        }
+
+        .member-info { text-align: left; flex-grow: 1; }
+        .member-name { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); margin-bottom: 0.2rem; }
+        .member-role { font-size: 0.95rem; color: var(--text-light); font-weight: 500; }
+
+        /* Efek Border saat Hover */
+        .toner-card:hover .member-avatar { border-color: var(--accent-toner); }
+        .serum-card:hover .member-avatar { border-color: var(--accent-serum); }
         /* Kartu Member */
         .member-card {
             background: #fff;
@@ -690,76 +776,66 @@
             <button class="btn-scroll" onclick="scrollToProducts()">Pilih Perawatan <i class="fas fa-chevron-down"></i></button>
         </section>
 
-        <!-- 1.5. TEAM SECTION (TIM KAMI) -->
+                <!-- 1.5. TEAM SECTION (TIM KAMI) -->
         <section class="team-section">
-            <h2 class="section-title" style="margin-bottom: 3rem;">Tim di Balik Produk</h2>
+            <h2 class="section-title" style="margin-bottom: 3rem;">Struktur Organisasi</h2>
+            
+            <!-- 1 SUPERVISOR BESAR (PAKING TENGAH ATAS) -->
+            <div class="supervisor-card">
+                <div class="supervisor-crown"><i class="fas fa-crown"></i></div> <!-- Ikon Mahkota -->
+                <img src="KIR/team/foto-supervisor-utama.jpg" alt="Big Supervisor" class="supervisor-avatar">
+                <div class="supervisor-info">
+                    <div class="supervisor-name">Nama Kepala Tim</div>
+                    <div class="supervisor-role">Chief Supervisor</div>
+                    <div style="font-size: 0.9rem; color: #777; margin-top: 5px;">"Memimpin kedua tim dengan integritas dan visi tinggi."</div>
+                </div>
+            </div>
+
+            <!-- GRID 2 TIM DI BAWAH SUPERVISOR -->
             <div class="team-grid">
                 
                 <!-- KOLOM 1: TIM 1 (TONER) -->
                 <div class="team-column toner-column">
                     <div class="team-title">Tim Bawi Toner</div>
                     
-                    <!-- SUPERVISOR -->
-                    <div class="member-card toner-card supervisor">
-                        <img src="KIR/team/foto-supervisor-toner.jpg" alt="Supervisor" class="member-avatar">
-                        <div class="member-info">
-                            <div class="member-name">Nama Supervisor</div>
-                            <div class="member-role">Pemimpin Proyek</div>
-                            <span class="badge-supervisor">SUPERVISOR</span>
-                        </div>
-                    </div>
-
                     <!-- Member 1 -->
-                    <div class="member-card serum-card">
-                        <img src="KIR/team/member-serum-1.jpg" alt="Member" class="member-avatar">
+                    <div class="member-card toner-card">
+                        <img src="KIR/team/member-toner-1.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
                             <div class="member-name">Nama Anggota 1</div>
-                            <div class="member-role">Riset Laboratorium</div>
+                            <div class="member-role">Riset & Pengembangan</div>
                         </div>
                     </div>
-
                     <!-- Member 2 -->
-                    <div class="member-card serum-card">
-                        <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
+                    <div class="member-card toner-card">
+                        <img src="KIR/team/member-toner-2.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
                             <div class="member-name">Nama Anggota 2</div>
-                            <div class="member-role">Desain Grafis</div>
+                            <div class="member-role">Marketing Digital</div>
                         </div>
                     </div>
-                    
-                 <!-- Member 3 -->
-                    <div class="member-card serum-card">
-                        <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
+                    <!-- Member 3 -->
+                    <div class="member-card toner-card">
+                        <img src="KIR/team/member-toner-3.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
-                            <div class="member-name">Nama Anggota 2</div>
-                            <div class="member-role">Desain Grafis</div>
+                            <div class="member-name">Nama Anggota 3</div>
+                            <div class="member-role">Quality Control</div>
                         </div>
                     </div>
-                
-                   <!-- Member 4 -->
-                    <div class="member-card serum-card">
-                        <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
+                    <!-- Member 4 -->
+                    <div class="member-card toner-card">
+                        <img src="KIR/team/member-toner-4.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
-                            <div class="member-name">Nama Anggota 2</div>
-                            <div class="member-role">Desain Grafis</div>
+                            <div class="member-name">Nama Anggota 4</div>
+                            <div class="member-role">Distribusi Logistik</div>
                         </div>
                     </div>
-                 </div>
+                </div>
 
                 <!-- KOLOM 2: TIM 2 (SERUM) -->
                 <div class="team-column serum-column">
                     <div class="team-title">Tim Tabela Serum</div>
                     
-                    <!-- SUPERVISOR -->
-                    <div class="member-card serum-card supervisor">
-                        <img src="KIR/team/foto-supervisor-serum.jpg" alt="Supervisor" class="member-avatar">
-                        <div class="member-info">
-                            <div class="member-name">Nama Supervisor</div>
-                            <div class="member-role">Pemimpin Proyek</div>
-                            <span class="badge-supervisor">SUPERVISOR</span>
-                        </div>
-                    </div>
-
                     <!-- Member 1 -->
                     <div class="member-card serum-card">
                         <img src="KIR/team/member-serum-1.jpg" alt="Member" class="member-avatar">
@@ -768,34 +844,33 @@
                             <div class="member-role">Riset Laboratorium</div>
                         </div>
                     </div>
-
                     <!-- Member 2 -->
                     <div class="member-card serum-card">
                         <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
                             <div class="member-name">Nama Anggota 2</div>
-                            <div class="member-role">Desain Grafis</div>
+                            <div class="member-role">Desain Grafis & Kreatif</div>
                         </div>
                     </div>
-                    
-                 <!-- Member 3 -->
+                    <!-- Member 3 -->
                     <div class="member-card serum-card">
-                        <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
+                        <img src="KIR/team/member-serum-3.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
-                            <div class="member-name">Nama Anggota 2</div>
-                            <div class="member-role">Desain Grafis</div>
+                            <div class="member-name">Nama Anggota 3</div>
+                            <div class="member-role">Customer Relations</div>
                         </div>
                     </div>
-                
-                   <!-- Member 4 -->
+                    <!-- Member 4 -->
                     <div class="member-card serum-card">
-                        <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
+                        <img src="KIR/team/member-serum-4.jpg" alt="Member" class="member-avatar">
                         <div class="member-info">
-                            <div class="member-name">Nama Anggota 2</div>
-                            <div class="member-role">Desain Grafis</div>
+                            <div class="member-name">Nama Anggota 4</div>
+                            <div class="member-role">Operational Manager</div>
                         </div>
                     </div>
-                 </div>
+                </div>
+
+            </div>
         </section>
         
         <!-- 2. SELECTION SECTION (Tengah) -->
@@ -1664,6 +1739,7 @@
     </script>
 </body>
 </html>
+
 
 
 
