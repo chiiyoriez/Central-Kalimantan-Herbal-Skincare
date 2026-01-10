@@ -509,6 +509,15 @@
             .card p { font-size: 0.9rem; }
             
             .lab-grid { grid-template-columns: 1fr; }
+
+                    /* CSS KHUSUS UNTUK LAB AGAR TINGGI FLEKSIBEL */
+        .detail-image-lab {
+            flex: 1 1 400px;
+            height: auto; /* PENTING: Biar tinggi ikuti isi foto lab */
+            min-height: 600px; /* Minimal tinggi supaya ga terlalu pendek */
+            background: #f9f9f9;
+            padding: 10px;
+        }
         }
     </style>
 </head>
@@ -711,7 +720,7 @@
     <section id="view-lab-toner" class="product-page hidden fade-in">
         <div class="detail-container">
             <!-- FOTO VERTICAL STACK (KIRI) -->
-            <div class="detail-image" style="padding: 10px;">
+            <div class="detail-image-lab">
                 <div class="lab-photo-grid">
                     <!-- Foto 1 (720x396) -->
                     <div class="lab-photo-item">
@@ -810,7 +819,7 @@
     <section id="view-lab-serum" class="product-page hidden fade-in">
         <div class="detail-container">
             <!-- FOTO VERTICAL STACK (KIRI) -->
-            <div class="detail-image" style="padding: 10px;">
+            <div class="detail-image-lab">
                 <div class="lab-photo-grid">
                     <!-- Foto 1 (720x521) -->
                     <div class="lab-photo-item">
@@ -1450,3 +1459,4 @@
     </script>
 </body>
 </html>
+
