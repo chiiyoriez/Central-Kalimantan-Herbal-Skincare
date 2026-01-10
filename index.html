@@ -1473,38 +1473,38 @@
         </div>
     </section>
 
-    <!-- VIEW 9: LAB SERUM DETAIL (AUTO HEIGHT) -->
+       <!-- VIEW 9: LAB SERUM DETAIL (FIXED JUSTIFY) -->
     <section id="view-lab-serum" class="product-page hidden fade-in">
         <div class="detail-container">
             <!-- FOTO VERTICAL STACK (KIRI) -->
             <div class="detail-image-lab">
                 <div class="lab-photo-grid">
-                    <!-- Foto 1 (720x521) -->
+                    <!-- Foto 1 -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 1.jpeg" width="100%" height="auto" alt="Foto 1">
                         <div class="lab-photo-caption">Visual Produk (Serum)</div>
                     </div>
-                    <!-- Foto 2 (720x337) -->
+                    <!-- Foto 2 -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 2.jpeg" width="100%" height="auto" alt="Foto 2">
                         <div class="lab-photo-caption">Analisis Kualitatif Flavonoid</div>
                     </div>
-                    <!-- Foto 3 (720x541) -->
+                    <!-- Foto 3 -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/gambar 2.jpeg" width="100%" height="auto" alt="Foto 3">
                         <div class="lab-photo-caption">Grafik Brightening (ITA)</div>
                     </div>
-                    <!-- Foto 4 (720x349) -->
+                    <!-- Foto 4 -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 3.jpeg" width="100%" height="auto" alt="Foto 4">
                         <div class="lab-photo-caption">Alat Viscositas</div>
                     </div>
-                    <!-- Foto 5 (720x482) -->
+                    <!-- Foto 5 -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/gambar 3.jpeg" width="100%" height="auto" alt="Foto 5">
                         <div class="lab-photo-caption">Hasil Uji Mikroba</div>
                     </div>
-                    <!-- Foto 6 (720x461) -->
+                    <!-- Foto 6 -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 4 dan 5.jpeg" width="100%" height="auto" alt="Foto 6">
                         <div class="lab-photo-caption">Signifikansi perbedaan aktivitas antar konsentrasi</div>
@@ -1512,67 +1512,71 @@
                 </div>
             </div>
             
-            <div class="detail-content">
+            <div class="detail-content" style="justify-content: flex-start !important;"> <!-- GUE TAMBAHIN STYLE DISINI UNTUK OVERRIDE -->
                 <div class="back-btn" onclick="navigateTo('home')"><i class="fas fa-arrow-left"></i> Kembali ke Menu</div>
                 <h2 style="color: var(--accent-serum-dark);">Laporan Uji Lab Tabela Serum</h2>
-                <div style="display: inline-block; padding: 5px 15px; background: #e0e0e0; border-radius: 5px; margin-normal: 2rem; font-size: 0.9rem;">>
+                <div style="display: inline-block; padding: 5px 15px; background: #e0e0e0; border-radius: 5px; margin-bottom: 2rem; font-size: 0.9rem;">
                     <i class="fas fa-calendar-alt"></i> Tes: 20 Januari 2025
                 </div>
                 <p class="detail-desc">
                     Tabela Serum diformulasikan dengan konsentrasi Vitamin C yang stabil. Uji laboratorium mengonfirmasi stabilitas kandungan dan efektivitas pencerahan tanpa iritasi signifikan.
                 </p>
 
-                <!-- 6 TABEL HASIL UJI LAB -->
+                <!-- 6 KARTU DATA HASIL UJI LAB -->
                 <h3 style="margin-bottom: 1rem; font-size: 1.5rem; color: var(--text-dark);">Hasil Uji Laboratorium</h3>
 
                 <!-- Tabel 1: Stabilitas Vitamin C -->
-                <table class="lab-table">
-                    <tr><th>Metode</th><th>Kadar Awal</th><th>Kadar Akhir (30 Hari)</th></tr>
-                    <tr><td>Spektrofotometri (UV)</td><td>20%</td><td class="result-pass">19.8% (Stabil)</td></tr>
-                    <tr><td>Metode HPLC</td><td>20%</td><td class="result-pass">20.1% (Stabil)</td></tr>
-                </table>
+                <div class="lab-data-card">
+                    <h3 class="lab-data-title"><i class="fas fa-flask"></i> Tabel 1. Stabilitas Vitamin C</h3>
+                    <p class="lab-data-desc">
+                        Uji Spektrofotometri (UV) dan HPLC menunjukkan kadar Vitamin C awal sebesar 20%. Setelah 30 hari, kadarnya stabil di <strong style="color:var(--accent-serum)">19.8% dan 20.1%</strong>. Ini membuktikan formulasi serum ini sangat stabil dan antioksidannya tidak mudah teroksidasi saat terkena udara.
+                    </p>
+                </div>
 
                 <!-- Tabel 2: Uji Brightening -->
-                <table class="lab-table">
-                    <tr><th>Indeks Kecerahan</th><th>Subjek (n=50)</th><th>Peningkatan</th></tr>
-                    <tr><td>ITA (L*)</td><td>50</td><td class="result-pass">+15.2%</td></tr>
-                    <tr><td>ITA (a*)</td><td>50</td><td class="result-pass">+14.8%</td></tr>
-                </table>
+                <div class="lab-data-card">
+                    <h3 class="lab-data-title"><i class="fas fa-chart-line"></i> Tabel 2. Uji Brightening</h3>
+                    <p class="lab-data-desc">
+                        Uji Indeks Kecerahan Kulit (ITA) pada 50 subjek menunjukkan peningkatan rata-rata. ITA (L*) naik sebesar <strong style="color:var(--accent-serum)">+15.2%</strong> dari nilai awal, dan ITA (a*) naik sebesar <strong style="color:var(--accent-serum)">+14.8%</strong>. Ini membuktikan efektivitas serum dalam mencerahkan kulit secara signifikan.
+                    </p>
+                </div>
 
                 <!-- Tabel 3: Uji Kelembapan -->
-                <table class="lab-table">
-                    <tr><th>Parameter</th><th>Nilai</th></tr>
-                    <tr><td>Viskositas (cps)</td><td>5,500</td></tr>
-                    <tr><td>Konsistensi (Pas)</td><td class="result-pass">Lulus</td></tr>
-                    <tr><td>Penyebaran (cm)</td><td>5.5</td></tr>
-                </table>
+                <div class="lab-data-card">
+                    <h3 class="lab-data-title"><i class="fas fa-tint"></i> Tabel 3. Uji Kelembapan</h3>
+                    <p class="lab-data-desc">
+                        Hasil uji fisika menunjukkan serum memiliki viskositas <strong>5,500 cps</strong>, konsistensi cair (Lulus uji Pas), dan daya sebar 5.5 cm. Teksturnya ringan namun tidak terlalu cair, nyaman digunakan dan mudah meresap ke pori-pori kulit.
+                    </p>
+                </div>
 
                 <!-- Tabel 4: Tantangan Mikroba -->
-                <table class="lab-table">
-                    <tr><th>Mikroba</th><th>Batas Maksimum (log CFU)</th><th>Hasil</th></tr>
-                    <tr><td>Total Aerob</td><td>10^3</td><td class="result-pass">< 10 CFU</td></tr>
-                    <tr><td>Yeast & Mold</td><td>10^2</td><td class="result-pass">< 10 CFU</td></tr>
-                    <tr><td>E. Coli</td><td>10</td><td class="result-pass">Negatif</td></tr>
-                </table>
+                <div class="lab-data-card">
+                    <h3 class="lab-data-title"><i class="fas fa-shield-virus"></i> Tabel 4. Tantangan Mikroba</h3>
+                    <p class="lab-data-desc">
+                        Uji Tantangan Mikroba (Challenge Test) menunjukkan produk steril dan bebas dari kontaminasi mikroba berbahaya. Total Aerob < 10 CFU, Yeast & Mold < 10 CFU, dan E. Coli Negatif. Hasil ini jauh di bawah batas maksimum yang diizinkan standar keamanan kosmetik.
+                    </p>
+                </div>
 
                 <!-- Tabel 5: Uji Iritasi -->
-                <table class="lab-table">
-                    <tr><th>Tes</th><th>Skor (0-4)</th><th>Status</th></tr>
-                    <tr><td>Eritasi Primer (Draize)</td><td>0</td><td class="result-pass">Non-Iritant</td></tr>
-                    <tr><td>Sensitifitas Kulit (Erythema)</td><td>0.5</td><td class="result-pass">Minimal</td></tr>
-                </table>
+                <div class="lab-data-card">
+                    <h3 class="lab-data-title"><i class="fas fa-hand-sparkles"></i> Tabel 5. Uji Iritasi</h3>
+                    <p class="lab-data-desc">
+                        Pada uji Eritasi Primer menggunakan metode Draize, produk mencatat skor <strong style="color:var(--accent-serum)">0</strong> pada mata kelinci (Non-Irritant) dan skor eritasi kulit <strong style="color:var(--accent-serum)">0.5</strong> (Minimal). Kesimpulannya, produk ini sangat aman digunakan pada kulit wajah tanpa menyebabkan iritasi merugikan.
+                    </p>
+                </div>
 
                 <!-- Tabel 6: Status BPOM -->
-                <table class="lab-table">
-                    <tr><th>Dokumen</th><th>Status</th></tr>
-                    <tr><td>Nomor Notifikasi</td><td class="result-pass">NA 18202001234</td></tr>
-                    <tr><td>Cara Penyajaman</td><td class="result-pass">Aman Digunakan</td></tr>
-                </table>
+                <div class="lab-data-card">
+                    <h3 class="lab-data-title"><i class="fas fa-check-circle"></i> Tabel 6. Status Keamanan & BPOM</h3>
+                    <p class="lab-data-desc">
+                        Produk telah dinyatakan <strong style="color:var(--accent-serum)">LULUS</strong> dalam uji keamanan standar. Nomor Notifikasi BPOM terdaftar (contoh: NA 18202001234) menjamin produk ini memenuhi persyaratan keamanan, kualitas, dan legal untuk diedarkan di pasar Indonesia.
+                    </p>
+                </div>
 
                 <button class="action-btn" style="background-color: var(--accent-serum); margin-top: 1rem;" onclick="navigateTo('serum')">Pesan Tabela Serum</button>
-            </div>
-        </div>
-    </section>
+            <div>
+        <div>
+    <section>
 
     <!-- VIEW 4: FORUM TONER -->
     <section id="view-toner-forum" class="product-page hidden fade-in">
@@ -2117,6 +2121,7 @@
     </script>
 </body>
 </html>
+
 
 
 
