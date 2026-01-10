@@ -333,12 +333,13 @@
         .action-btn { width: 100%; padding: 15px; border: none; border-radius: 50px; color: rgb(0, 0, 0); font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: var(--transition); text-align: center; display: block; }
         .action-btn:hover { opacity: 0.9; transform: scale(1.02); }
 
-        /* --- LAB DETAIL SPECIFIC STYLES (VERTICAL STACK) --- */
-        /* Grid Foto - DIUBAH JADI VERTICAL STACK */
+                /* --- LAB DETAIL SPECIFIC STYLES --- */
+        
+        /* Grid Foto - DIUBAH AGAR AUTO HEIGHT (TIDAK CROP) */
         .lab-photo-grid {
             display: flex;
             flex-direction: column; /* Numpuk ke bawah */
-            gap: 15px; /* Jarak antar foto */
+            gap: 10px; /* Jarak antar container */
             height: 100%;
             overflow-y: auto; /* Scroll jika melebihi ketinggian layar */
             padding: 10px;
@@ -348,36 +349,44 @@
         
         .lab-photo-item {
             width: 100%;
-            /* Tinggi fixed agar rapi seperti masonry */
-            height: 250px; 
-            position: relative;
+            /* HILANGKAN HEIGHT FIX */
+            height: auto; /* Tinggi mengikuti isi gambar (396px, 156px, dll) */
+            position: relative; 
             border-radius: 15px;
             overflow: hidden;
             cursor: pointer;
             border: 2px solid transparent;
             transition: var(--transition);
+            margin-bottom: 20px; /* Jarak untuk caption di bawah */
+            max-width: 600px; /* Batasi lebar maksimal agar rapi */
         }
+
         .lab-photo-item:hover { border-color: var(--accent-toner); }
         
         .lab-photo-item img {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s;
+            width: 100%; 
+            /* HILANGKAN HEIGHT FIX */
+            height: auto; /* Penting agar tidak crop */
+            object-fit: contain; /* Pastikan gambar terlihat penuh */
+            display: block; 
+            transition: transform 0.3s;
         }
-        .lab-photo-item:hover img { transform: scale(1.05); }
+        .lab-photo-item:hover img { transform: scale(1.02); } /* Sedikit zoom efek */
 
         /* Keterangan Foto (Caption) */
         .lab-photo-caption {
-            margin-top: -30px; /* Tarik ke atas sedikit agar overlap dengan gambar */
-            margin-bottom: 20px; /* Jarak ke foto berikutnya */
+            /* DIUBAH: Tidak lagi overlap negatif, tapi ada margin positif */
+            margin-top: 10px; 
             z-index: 2;
             position: relative;
-            background: rgba(255, 255, 255, 0.95); /* Background putih transparan */
+            background: rgba(255,255,255, 0.95);
             padding: 8px 15px;
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 700;
             color: var(--text-dark);
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: max-content; /* Lebar sesuai teks */
+            width: max-content;
             text-align: center;
             border: 1px solid #eee;
         }
@@ -1426,6 +1435,7 @@
     </script>
 </body>
 </html>
+
 
 
 
