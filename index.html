@@ -491,6 +491,103 @@
         }
         .social-links a:hover { color: var(--accent-toner); transform: scale(1.2); }
 
+        /* --- TEAM SECTION (TIM KAMI) --- */
+        .team-section {
+            background: var(--white);
+            padding: 4rem 5%;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .team-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .toner-column .team-title { border-bottom: 4px solid var(--accent-toner); padding-bottom: 0.5rem; }
+        .serum-column .team-title { border-bottom: 4px solid var(--accent-serum); padding-bottom: 0.5rem; }
+
+        /* Kartu Member */
+        .member-card {
+            background: #fff;
+            border: 1px solid #eee;
+            border-radius: 20px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 350px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+        }
+
+        .member-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid transparent;
+        }
+
+        .member-info {
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .member-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .member-role {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        /* Badge Supervisor */
+        .badge-supervisor {
+            display: inline-block;
+            background: var(--admin-color); /* Warna Orange */
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 50px;
+            margin-top: 5px;
+            box-shadow: 0 2px 5px rgba(255, 152, 0, 0.2);
+        }
+
+        .toner-card:hover .member-avatar { border-color: var(--accent-toner); }
+        .serum-card:hover .member-avatar { border-color: var(--accent-serum); }
+        
         /* --- RESPONSIVE MEDIA QUERIES --- */
         @media (max-width: 900px) { .forum-wrapper { grid-template-columns: 1fr; } .form-card { position: static; } }
         
@@ -593,6 +690,80 @@
             <button class="btn-scroll" onclick="scrollToProducts()">Pilih Perawatan <i class="fas fa-chevron-down"></i></button>
         </section>
 
+        <!-- 1.5. TEAM SECTION (TIM KAMI) -->
+        <section class="team-section">
+            <h2 class="section-title" style="margin-bottom: 3rem;">Tim di Balik Produk</h2>
+            <div class="team-grid">
+                
+                <!-- KOLOM 1: TIM 1 (TONER) -->
+                <div class="team-column toner-column">
+                    <div class="team-title">Tim Bawi Toner</div>
+                    
+                    <!-- SUPERVISOR -->
+                    <div class="member-card toner-card supervisor">
+                        <img src="KIR/team/foto-supervisor-toner.jpg" alt="Supervisor" class="member-avatar">
+                        <div class="member-info">
+                            <div class="member-name">Nama Supervisor</div>
+                            <div class="member-role">Pemimpin Proyek</div>
+                            <span class="badge-supervisor">SUPERVISOR</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 1 -->
+                    <div class="member-card toner-card">
+                        <img src="KIR/team/member-toner-1.jpg" alt="Member" class="member-avatar">
+                        <div class="member-info">
+                            <div class="member-name">Nama Anggota 1</div>
+                            <div class="member-role">Riset & Pengembangan</div>
+                        </div>
+                    </div>
+
+                    <!-- Member 2 -->
+                    <div class="member-card toner-card">
+                        <img src="KIR/team/member-toner-2.jpg" alt="Member" class="member-avatar">
+                        <div class="member-info">
+                            <div class="member-name">Nama Anggota 2</div>
+                            <div class="member-role">Marketing Digital</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KOLOM 2: TIM 2 (SERUM) -->
+                <div class="team-column serum-column">
+                    <div class="team-title">Tim Tabela Serum</div>
+                    
+                    <!-- SUPERVISOR -->
+                    <div class="member-card serum-card supervisor">
+                        <img src="KIR/team/foto-supervisor-serum.jpg" alt="Supervisor" class="member-avatar">
+                        <div class="member-info">
+                            <div class="member-name">Nama Supervisor</div>
+                            <div class="member-role">Pemimpin Proyek</div>
+                            <span class="badge-supervisor">SUPERVISOR</span>
+                        </div>
+                    </div>
+
+                    <!-- Member 1 -->
+                    <div class="member-card serum-card">
+                        <img src="KIR/team/member-serum-1.jpg" alt="Member" class="member-avatar">
+                        <div class="member-info">
+                            <div class="member-name">Nama Anggota 1</div>
+                            <div class="member-role">Riset Laboratorium</div>
+                        </div>
+                    </div>
+
+                    <!-- Member 2 -->
+                    <div class="member-card serum-card">
+                        <img src="KIR/team/member-serum-2.jpg" alt="Member" class="member-avatar">
+                        <div class="member-info">
+                            <div class="member-name">Nama Anggota 2</div>
+                            <div class="member-role">Desain Grafis</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
         <!-- 2. SELECTION SECTION (Tengah) -->
         <section id="products-section">
             <div class="selection-container">
@@ -829,7 +1000,7 @@
                     <!-- Foto 2 (720x337) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 2.jpeg" width="100%" height="auto" alt="Foto 2">
-                        <div class="lab-photo-caption">Sampel Uji UV-Vis</div>
+                        <div class="lab-photo-caption">Analisis Kualitatif Flavonoid</div>
                     </div>
                     <!-- Foto 3 (720x541) -->
                     <div class="lab-photo-item">
@@ -849,7 +1020,7 @@
                     <!-- Foto 6 (720x461) -->
                     <div class="lab-photo-item">
                         <img src="KIR/tabela serum/table 4 dan 5.jpeg" width="100%" height="auto" alt="Foto 6">
-                        <div class="lab-photo-caption">Sertifikat Halal & BPOM</div>
+                        <div class="lab-photo-caption">Signifikansi perbedaan aktivitas antar konsentrasi</div>
                     </div>
                 </div>
             </div>
@@ -1459,4 +1630,5 @@
     </script>
 </body>
 </html>
+
 
